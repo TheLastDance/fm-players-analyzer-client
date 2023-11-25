@@ -8,10 +8,8 @@ app.use(cors());
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
-app.get('/api', (req: any, res: any) => {
-  res.json({
-    Hello: 'World'
-  })
+app.post('/api', (req: any, res: any) => {
+  res.json(req.body)
 })
 
 app.listen(PORT, () => {
