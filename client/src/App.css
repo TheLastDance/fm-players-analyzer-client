@@ -1,3 +1,8 @@
 body {
   min-height: 100svh;
 }
+
+ul {
+  width: 1000px;
+  margin: 0 auto;
+}
