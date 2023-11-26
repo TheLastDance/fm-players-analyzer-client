@@ -1,15 +1,21 @@
 import { useState } from 'react'
 import './App.css'
-interface IrowData {
-  attributes: {
-    [key: string]: number | string;
-  }
+
+type Attribute = {
+  [innerKey: string]: number;
 }
+
+type RowData = {
+  attributes: Attribute;
+} & {
+  [key: string]: string | number;
+}
+
 function App() {
   const [file, setFile] = useState<File | null>(null);
-  const [data, setData] = useState<IrowData[] | null>(null);
+  const [data, setData] = useState<RowData[] | null>(null);
 
-  const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) setFile(file);
   }
@@ -36,15 +42,15 @@ function App() {
     <>
       <form onSubmit={handleSubmit}>
         <label>
-          <input type="file" accept="text/html" onChange={handlePhotoChange} />
+          <input type="file" accept="text/html" onChange={handleFileChange} />
         </label>
         <button type='submit'>Submit</button>
       </form>
       <ul>
-        {data && data.map((item: IrowData) => <li key={item.attributes.Name}>
-          <span>{item.attributes.Name}</span>
-          <span>{item.attributes.Age}</span>
-          <span>{item.attributes['Transfer Value']}</span>
+        {data && data.map((item: RowData) => <li key={item.Name}>
+          <span>{item.Name}</span>
+          <span>{item.Age}</span>
+          <span>{item['Transfer Value']}</span>
         </li>)}
       </ul>
     </>
