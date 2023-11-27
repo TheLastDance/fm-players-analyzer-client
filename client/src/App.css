@@ -6,3 +6,7 @@ ul {
   width: 1000px;
   margin: 0 auto;
 }
+
+ul li span {
+  padding: 10px;
+}

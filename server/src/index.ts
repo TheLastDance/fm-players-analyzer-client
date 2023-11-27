@@ -2,6 +2,9 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import htmlToData from './utils/parseHtmlToData';
+import calculateSkill from './utils/calculateSkill';
+import { positions } from './data/positions';
+import calculateCoef from './utils/calculateCoef';
 
 const app: Express = express();
 const PORT: string | number = process.env.PORT || 3000;
@@ -18,11 +21,15 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
     if (req.file) {
       const htmlBuffer = req.file.buffer;
       const htmlString = htmlBuffer.toString('utf-8');
+      const parsed = htmlToData(htmlString);
 
-      const tableData = htmlToData(htmlString);
-
-      console.log('Received HTML content:', tableData);
-      res.status(200).json(tableData);
+      if (parsed.some(item => !Object.keys(item.attributes).length)) {
+        res.status(500).json({ error: 'Use your language' });
+      } else {
+        const coefData = calculateCoef(positions);
+        const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes) }));
+        res.status(200).json(tableData);
+      }
     }
   } catch (error) {
     console.error('Error handling file upload:', error);

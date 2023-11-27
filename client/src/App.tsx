@@ -7,6 +7,10 @@ type Attribute = {
 
 type RowData = {
   attributes: Attribute;
+  skills: {
+    ST: number,
+    CD: number,
+  }
 } & {
   [key: string]: string | number;
 }
@@ -47,10 +51,13 @@ function App() {
         <button type='submit'>Submit</button>
       </form>
       <ul>
-        {data && data.map((item: RowData) => <li key={item.Name}>
+        {data && data.map((item: RowData, index) => <li key={index}>
+          {item['Best Pos'] && <span>{item['Best Pos']}</span>}
           <span>{item.Name}</span>
           <span>{item.Age}</span>
           <span>{item['Transfer Value']}</span>
+          <span onClick={() => setData([...data].sort((a, b) => b.skills.ST - a.skills.ST))}>{item.skills.ST.toFixed(2)}</span>
+          <span>{item.skills.CD.toFixed(2)}</span>
         </li>)}
       </ul>
     </>
