@@ -30,7 +30,7 @@ function App() {
     if (file) {
       const formData = new FormData();
       formData.append('htmlFile', file);
-      fetch('/api', {
+      fetch('https://fm-players-analyzer.onrender.com/api', {
         method: 'POST',
         body: formData,
       })
