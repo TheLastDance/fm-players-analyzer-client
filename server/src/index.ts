@@ -22,7 +22,7 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
       const htmlBuffer = req.file.buffer;
       const htmlString = htmlBuffer.toString('utf-8');
       const parsed = htmlToData(htmlString);
-      const a = performance.now();
+      //const a = performance.now();
 
       if (parsed.some(item => !Object.keys(item.attributes).length)) {
         res.status(500).json({ error: 'Use your language' });
@@ -41,7 +41,7 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
         //     CM: calculateSkill(coefData, item.attributes, 'ST'),
         //   }
         // }));
-        console.log(performance.now() - a);
+        //console.log(performance.now() - a);
         res.status(200).json(tableData);
       }
     }
