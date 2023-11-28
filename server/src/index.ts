@@ -22,6 +22,7 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
       const htmlBuffer = req.file.buffer;
       const htmlString = htmlBuffer.toString('utf-8');
       const parsed = htmlToData(htmlString);
+
       //const a = performance.now();
 
       if (parsed.some(item => !Object.keys(item.attributes).length)) {
@@ -30,17 +31,6 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
         const coefData = calculateCoef(positions);
         //const data = calculateSkill(coefData, parsed);
         const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes) }));
-        // const tableData = parsed.map(item => ({
-        //   ...item, skills: {
-        //     ST: calculateSkill(coefData, item.attributes, 'ST'),
-        //     CD: calculateSkill(coefData, item.attributes, 'CD'),
-        //     GK: calculateSkill(coefData, item.attributes, 'GK'),
-        //     DM: calculateSkill(coefData, item.attributes, 'DM'),
-        //     RM: calculateSkill(coefData, item.attributes, 'RM'),
-        //     LM: calculateSkill(coefData, item.attributes, 'LM'),
-        //     CM: calculateSkill(coefData, item.attributes, 'ST'),
-        //   }
-        // }));
         //console.log(performance.now() - a);
         res.status(200).json(tableData);
       }

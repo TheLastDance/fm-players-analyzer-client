@@ -20,7 +20,7 @@ export type Tiers = {
   tier_1: ForTiers;
   tier_2: ForTiers;
   tier_3: ForTiers;
-  tier_4?: ForTiers;
+  tier_4: ForTiers;
 }
 
 export type IPositions = {

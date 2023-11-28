@@ -2,12 +2,10 @@ import { RowData } from "../types";
 import { attributes } from "../data/attributes";
 import * as cheerio from 'cheerio';
 
+
 function htmlToData(htmlFile: string, lang: keyof typeof attributes = 'en') {
-  //const a = performance.now();
   // Load the HTML into Cheerio
   const $ = cheerio.load(htmlFile);
-  //console.log(performance.now() - a);
-
 
   // Find the table using a selector
   const table = $('table');
@@ -46,7 +44,6 @@ function htmlToData(htmlFile: string, lang: keyof typeof attributes = 'en') {
     // Push the object to the array
     tableData.push(rowData);
   });
-  //console.log(performance.now() - a);
 
   return tableData;
 }
