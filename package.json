@@ -7,6 +7,8 @@
     "start-server": "concurrently \"npm run start-server:server\" ",
     "start-client": "concurrently \"npm run start-client:client\" ",
     "build": "concurrently \"npm run build:build \" ",
+    "install-server": "cd server && npm i",
+    "install-client": "cd client && npm i",
     "start-server:server": "cd server && npm start",
     "start-client:client": "cd client && npm run dev",
     "build:build": "cd client && npm run build"
