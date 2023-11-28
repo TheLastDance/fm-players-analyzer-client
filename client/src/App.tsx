@@ -30,7 +30,7 @@ function App() {
     if (file) {
       const formData = new FormData();
       formData.append('htmlFile', file);
-      fetch('http://localhost:3000/api', {
+      fetch('/api', {
         method: 'POST',
         body: formData,
       })
