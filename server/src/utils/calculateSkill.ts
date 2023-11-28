@@ -18,7 +18,7 @@ function calculateSkill(positions: ICalculateCoef, playersAttributes: RowData['a
 
     skills[keysOfPositions[i]] = (count / coef[i]) * 5.5;
   }
-  console.log(counter);
+  //console.log(counter);
 
 
   return skills;
