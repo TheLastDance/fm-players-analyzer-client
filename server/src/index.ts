@@ -5,6 +5,7 @@ import htmlToData from './utils/parseHtmlToData';
 import calculateSkill from './utils/calculateSkill';
 import { positions } from './data/positions';
 import calculateCoef from './utils/calculateCoef';
+import translationToClient from './utils/translationToClient';
 
 const app: Express = express();
 const PORT: string | number = process.env.PORT || 3000;
@@ -21,16 +22,15 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
     if (req.file) {
       const htmlBuffer = req.file.buffer;
       const htmlString = htmlBuffer.toString('utf-8');
-      const parsed = htmlToData(htmlString);
+      const parsed = htmlToData(htmlString, 'en');
 
       //const a = performance.now();
 
-      if (parsed.some(item => !Object.keys(item.attributes).length)) {
+      if (Object.keys(parsed[0].attributes).length < 5) {
         res.status(500).json({ error: 'Use your language' });
       } else {
         const coefData = calculateCoef(positions);
-        //const data = calculateSkill(coefData, parsed);
-        const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes) }));
+        const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes), attributes: translationToClient(item.attributes, 'en') }));
         //console.log(performance.now() - a);
         res.status(200).json(tableData);
       }
