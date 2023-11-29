@@ -66,7 +66,11 @@ function App() {
           <span onClick={() => handleSort('GK')}>{item.skills.GK.toFixed(2)}</span>
           <span onClick={() => handleSort('CM')}>{item.skills.CM.toFixed(2)}</span>
           <span onClick={() => handleSort('Winger')}>{item.skills.Winger.toFixed(2)}</span>
-          <span onClick={() => handleSort('Overall')}>{item.skills.Overall.toFixed(2)}</span>
+          <span onClick={() => handleSort('DM')}>{item.skills.DM.toFixed(2)}</span>
+          <span onClick={() => handleSort('AM')}>{item.skills.AM.toFixed(2)}</span>
+          <span onClick={() => handleSort('WM')}>{item.skills.WM.toFixed(2)}</span>
+          <span onClick={() => handleSort('FB')}>{item.skills.FB.toFixed(2)}</span>
+          <span onClick={() => handleSort('WB')}>{item.skills.WB.toFixed(2)}</span>
         </li>) : null}
       </ul>
     </>
