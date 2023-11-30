@@ -20,9 +20,10 @@ const upload = multer({ storage: storage });
 app.post('/api', upload.single('htmlFile'), (req, res) => {
   try {
     if (req.file) {
+      const { lang } = req.body;
       const htmlBuffer = req.file.buffer;
       const htmlString = htmlBuffer.toString('utf-8');
-      const parsed = htmlToData(htmlString, 'en');
+      const parsed = htmlToData(htmlString, lang);
 
       //const a = performance.now();
 
@@ -30,7 +31,7 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
         res.status(500).json({ error: 'Use your language' });
       } else {
         const coefData = calculateCoef(positions);
-        const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes), attributes: translationToClient(item.attributes, 'en') }));
+        const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes), attributes: translationToClient(item.attributes, lang) }));
         //console.log(performance.now() - a);
         res.status(200).json(tableData);
       }

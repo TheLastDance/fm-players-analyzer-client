@@ -5,7 +5,6 @@ import changeObjectPairs from "./changeObjectPairs";
 
 
 function htmlToData(htmlFile: string, lang: keyof typeof attributes = 'en') {
-  // Load the HTML into Cheerio
   const $ = cheerio.load(htmlFile);
 
   // Find the table using a selector
@@ -44,7 +43,6 @@ function htmlToData(htmlFile: string, lang: keyof typeof attributes = 'en') {
       }
     });
 
-    // Push the object to the array
     tableData.push(rowData);
   });
 

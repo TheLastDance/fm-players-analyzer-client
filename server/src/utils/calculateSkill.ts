@@ -3,8 +3,8 @@ import { ICalculateCoef, ForTiers } from "../types";
 
 function calculateSkill(positions: ICalculateCoef, playersAttributes: Attributes) {
   const { mergedObj, coef, keysOfPositions } = positions;
+  const multiplier = 5.5; // max skill in game equals to 20 so if we want overall skills as in fifa/pes we need to multiply our count to this variable.
   let skills: ForTiers = {};
-  let counter = 0;
 
   for (let i = 0; i < mergedObj.length; i++) {
     const pos = mergedObj[i][keysOfPositions[i]]; // merged object of stats coefficients
@@ -14,13 +14,10 @@ function calculateSkill(positions: ICalculateCoef, playersAttributes: Attributes
     for (let j = 0; j < posArr.length; j++) {
       const key = posArr[j] as keyof Attributes;
       count = pos[key] * playersAttributes[key] + count; // sums attribute multiplied by its coefficient
-      counter++
     }
 
-    skills[keysOfPositions[i]] = (count / coef[i]) * 5.5;
+    skills[keysOfPositions[i]] = (count / coef[i]) * multiplier;
   }
-  //console.log(counter);
-
 
   return skills;
 }

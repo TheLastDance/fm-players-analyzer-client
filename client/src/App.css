@@ -1,9 +1,12 @@
 body {
-  min-height: 100svh;
+  background: var(--backgroundColor);
+  color: var(--maincFontColor);
+  font-weight: 500;
+  font-family: Roboto;
 }
 
-ul {
-  width: 1000px;
+#root {
+  max-width: 1250px;
   margin: 0 auto;
 }
 
