@@ -4,19 +4,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { languages } from '../../data/langueages';
+import { languages } from '../../data/languages';
 import { Language } from '../../types';
 import { selectStyles, dropDownStyles } from './MuiStyles';
-//import { styled } from '@mui/material';
 
 interface INav {
   lang: string,
   setLang: React.Dispatch<React.SetStateAction<Language['lang']>>,
 }
-
-// const Header = styled('header')(({ theme }) => ({
-//   ...theme.typography.button,
-// }));
 
 const Nav = ({ lang, setLang }: INav) => {
 

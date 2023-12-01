@@ -1,0 +1,47 @@
+.players_section {
+  width: 100%;
+  height: 750px;
+  margin: 25px auto;
+  background: var(--maincFontColor);
+  border-radius: 10px;
+  padding-bottom: 10px;
+  color: black;
+  overflow-x: scroll;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.players_section th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  font-weight: 700;
+  padding: 10px 30px;
+  border-bottom: 1px solid black;
+  color: var(--maincFontColor);
+  background: var(--darkColor);
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.players_section th:hover {
+  text-decoration: underline;
+  color: var(--blueColor);
+}
+
+td {
+  padding: 10px 0;
+  text-align: center;
+  border-right: 1px solid black;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr:hover {
+  background: #6e6a6a;
+}

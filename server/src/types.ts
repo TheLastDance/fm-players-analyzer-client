@@ -26,6 +26,14 @@ export type Tiers = {
 export type IPositions = {
   ST: Tiers,
   CD: Tiers,
+  GK: Tiers,
+  CM: Tiers,
+  WA: Tiers,
+  DM: Tiers,
+  AM: Tiers,
+  WM: Tiers,
+  FB: Tiers,
+  WB: Tiers,
 } & {
   [key: string]: Tiers;
 };

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export function useToggle(isToggled = false) {
+export function useToggle(isToggled: boolean = false): [boolean, () => void, () => void, () => void] {
   const [toggle, setToggle] = useState(isToggled);
 
   const handleToggle = () => {

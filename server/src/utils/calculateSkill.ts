@@ -16,7 +16,7 @@ function calculateSkill(positions: ICalculateCoef, playersAttributes: Attributes
       count = pos[key] * playersAttributes[key] + count; // sums attribute multiplied by its coefficient
     }
 
-    skills[keysOfPositions[i]] = (count / coef[i]) * multiplier;
+    skills[keysOfPositions[i]] = Number(((count / coef[i]) * multiplier).toFixed(2));
   }
 
   return skills;

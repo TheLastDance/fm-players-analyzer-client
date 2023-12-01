@@ -215,7 +215,7 @@ export const positions: IPositions = {
       "Dri": 0.25,
     }
   },
-  'Winger': {
+  'WA': {
     tier_1: {
       "Dri": 10,
       "Fir": 10,
@@ -441,49 +441,49 @@ export const positions: IPositions = {
       "Lon": 0.25,
     }
   },
-  'Overall': {
-    tier_1: {},
-    tier_2: {},
-    tier_3: {
-      "Agg": 1,
-      "Fre": 1,
-      "Bra": 1,
-      "Acc": 1,
-      "Cor": 1,
-      "Tec": 1,
-      "Pac": 1,
-      "Str": 1,
-      "Cmp": 1,
-      "Det": 1,
-      "Wor": 1,
-      "Nat": 1,
-      "Dec": 1,
-      "Fir": 1,
-      "Pen": 1,
-      "Pas": 1,
-      "Tck": 1,
-      "Mar": 1,
-      "Cro": 1,
-      "Agi": 1,
-      "Ldr": 1,
-      "Bal": 1,
-      "Cnt": 1,
-      "Tea": 1,
-      "Ant": 1,
-      "Fla": 1,
-      "Hea": 1,
-      "OtB": 1,
-      "Fin": 1,
-      "Dri": 1,
-      "Lon": 1,
-      "Jum": 1,
-      "Sta": 1,
-      "Pos": 1,
-      "Vis": 1,
-      "L Th": 1
-    },
-    tier_4: {}
-  }
+  // 'Overall': {
+  //   tier_1: {},
+  //   tier_2: {},
+  //   tier_3: {
+  //     "Agg": 1,
+  //     "Fre": 1,
+  //     "Bra": 1,
+  //     "Acc": 1,
+  //     "Cor": 1,
+  //     "Tec": 1,
+  //     "Pac": 1,
+  //     "Str": 1,
+  //     "Cmp": 1,
+  //     "Det": 1,
+  //     "Wor": 1,
+  //     "Nat": 1,
+  //     "Dec": 1,
+  //     "Fir": 1,
+  //     "Pen": 1,
+  //     "Pas": 1,
+  //     "Tck": 1,
+  //     "Mar": 1,
+  //     "Cro": 1,
+  //     "Agi": 1,
+  //     "Ldr": 1,
+  //     "Bal": 1,
+  //     "Cnt": 1,
+  //     "Tea": 1,
+  //     "Ant": 1,
+  //     "Fla": 1,
+  //     "Hea": 1,
+  //     "OtB": 1,
+  //     "Fin": 1,
+  //     "Dri": 1,
+  //     "Lon": 1,
+  //     "Jum": 1,
+  //     "Sta": 1,
+  //     "Pos": 1,
+  //     "Vis": 1,
+  //     "L Th": 1
+  //   },
+  //   tier_4: {}
+  // }
 }
 
 // for players

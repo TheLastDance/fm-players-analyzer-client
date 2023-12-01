@@ -26,3 +26,9 @@ ul li {
 ul li span {
   padding: 0 10px;
 }
+
+@media(max-width: 1250px) {
+  #root {
+    margin: 0 15px;
+  }
+}

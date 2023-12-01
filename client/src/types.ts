@@ -7,10 +7,18 @@ export type RowData = {
   skills: {
     ST: number,
     CD: number,
+    GK: number,
+    CM: number,
+    WA: number,
+    DM: number,
+    AM: number,
+    WM: number,
+    FB: number,
+    WB: number,
     [key: string]: number;
   }
 } & {
-  [key: string]: string | number;
+  [key: string]: number;
 }
 
 export type Language = {
