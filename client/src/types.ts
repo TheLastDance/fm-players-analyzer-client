@@ -15,4 +15,5 @@ export type RowData = {
 
 export type Language = {
   lang: 'en' | 'ru',
+  img: string,
 }

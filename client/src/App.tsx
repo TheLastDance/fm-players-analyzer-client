@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 import './App.css'
 import { RowData } from './types';
 import Nav from './components/Nav/Nav';
+import Form from './components/Form/Form';
 import { Language } from './types';
 
 
@@ -27,7 +30,7 @@ function App() {
       const formData = new FormData();
       formData.append('htmlFile', file);
       formData.append('lang', lang);
-
+      // https://fm-players-analyzer.onrender.com/api
       fetch('http://localhost:3000/api', {
         method: 'POST',
         body: formData,
@@ -51,13 +54,8 @@ function App() {
     <>
       <Nav lang={lang} setLang={setLang} />
       <main>
-        <form onSubmit={handleSubmit}>
-          <label>
-            <input type="file" accept="text/html" onChange={handleFileChange} />
-          </label>
-          <button type='submit'>Submit</button>
-        </form>
-        <ul>
+        <Form handleFileChange={handleFileChange} handleSubmit={handleSubmit} />
+        <ul style={{ margin: "30px 0" }}>
           {data.length ? data.map((item: RowData, index) => <li key={index}>
             <span>{item['Best Pos']}</span>
             <span>{item.Name}</span>
