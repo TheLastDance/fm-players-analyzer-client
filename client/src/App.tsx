@@ -2,20 +2,23 @@ import { useState } from 'react'
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import './App.css'
-import { RowData } from './types';
 import Nav from './components/Nav/Nav';
 import Form from './components/Form/Form';
 import Table from './components/Table/Table';
-import { Language } from './types';
+import { Language, newDataType, RowData } from './types';
+import { extractFromArray } from './Utils/extractFromArray';
 
 
 function App() {
   const storedData = localStorage.getItem('data');
   const storedLang = localStorage.getItem('lang') as Language['lang'];
+  const storedNewData = localStorage.getItem('newData');
   const initialData: RowData[] = storedData ? JSON.parse(storedData) : [];
   const initialLang: Language['lang'] = storedLang ? storedLang : 'en';
+  const initialNewData: newDataType[] = storedNewData ? JSON.parse(storedNewData) : [];
   const [file, setFile] = useState<File | undefined>(undefined);
   const [data, setData] = useState<RowData[]>(initialData);
+  const [newData, setNewData] = useState<newDataType[]>(initialNewData);
   const [lang, setLang] = useState(initialLang);
 
 
@@ -40,6 +43,8 @@ function App() {
         .then(json => {
           setData(json);
           localStorage.setItem('data', JSON.stringify(json));
+          setNewData(json.length ? json.map(extractFromArray) : data);
+          localStorage.setItem('newData', JSON.stringify(json.map(extractFromArray)));
         })
     }
   }
@@ -51,7 +56,7 @@ function App() {
       <Nav lang={lang} setLang={setLang} />
       <main>
         <Form handleFileChange={handleFileChange} handleSubmit={handleSubmit} />
-        {data.length ? <Table data={data} setData={setData} /> : null}
+        {data.length ? <Table data={data} newData={newData} setNewData={setNewData} /> : null}
       </main>
     </>
   )

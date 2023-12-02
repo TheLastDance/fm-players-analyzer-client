@@ -9,6 +9,7 @@
   --inputFS: calc(16px * var(--scaleFactor));
   --backgroundColor: linear-gradient(180deg, rgba(13, 15, 36, 1) 1%, rgba(34, 37, 74, 1) 100%);
   --maincFontColor: rgb(201, 193, 193);
+  --tableTdColor: rgb(136, 143, 125);
   --gradient: linear-gradient(285deg, rgba(226, 225, 222, 1) 1%, rgb(155, 165, 137) 100%);
   --darkColor: rgb(41, 44, 46);
   --blueColor: #1976d2;

@@ -2,7 +2,7 @@ export const titles = {
   ST: "Center Forward",
   CD: "Central Defender",
   GK: "Goalkeeper",
-  CM: "Central Midfieler",
+  CM: "Central Midfielder",
   WA: "Winger (Attack)",
   DM: "Defensive Midfielder",
   AM: "Attacking Midfielder",

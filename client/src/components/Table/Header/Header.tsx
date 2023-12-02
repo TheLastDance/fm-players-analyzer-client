@@ -1,13 +1,13 @@
 import { titles } from "../../../data/positionsTitles";
 import { useToggle } from "../../../customHooks/useToggle";
+import { handleTitles } from "../../../Utils/handleTitles";
 
 interface IHeader {
   item: string,
   handleSort: (item: keyof typeof titles, toggle?: boolean) => void,
-  handleTitles: (item: keyof typeof titles) => string,
 }
 
-const Header = ({ item, handleSort, handleTitles }: IHeader) => {
+const Header = ({ item, handleSort }: IHeader) => {
   const [toggle, handleToggle] = useToggle();
 
   return (

@@ -1,63 +1,73 @@
 import './Table.css'
-import { RowData } from '../../types'
+import { useState, memo } from 'react';
+import { RowData, newDataType } from '../../types'
 import { titles } from '../../data/positionsTitles';
 import Header from './Header/Header';
+import { TablePagination } from '@mui/material';
+import { skillsQualityStyle } from '../../Utils/skillsQualityStyle';
+import { handleTitles } from '../../Utils/handleTitles';
 
 interface ITable {
   data: RowData[],
-  setData: React.Dispatch<React.SetStateAction<RowData[]>>,
+  newData: newDataType[],
+  setNewData: React.Dispatch<React.SetStateAction<newDataType[]>>,
 }
 
-const Table = ({ data, setData }: ITable) => {
+const Table = memo(({ data, newData, setNewData }: ITable) => {
   const skills = data.length ? data[0].skills : [];
   const headers = data.length ? Object.keys({ ...skills, ...data[0] }).filter(item => item !== 'skills' && item !== "attributes") : [];
-  const newData = data.length ? data.map(item => {
-    // eslint-disable-next-line
-    const { attributes, skills, ...rest } = item;
-    return { ...skills, ...rest }
-  }) : [];
-
-  const handleTitles = (item: keyof typeof titles) => {
-    if (Object.prototype.hasOwnProperty.call(titles, item)) {
-      return titles[item];
-    }
-    return "";
-  }
+  const [page, setPage] = useState(0); // page of pagination
+  const [qty, setQty] = useState(50); // quantity of rows inside table for pagination.
 
   const handleSort = (item: keyof typeof titles, toggle: boolean = false) => {
     if (!toggle) {
       if (handleTitles(item)) {
-        setData(prev => [...prev].sort((a: RowData, b: RowData) => b.skills[item] - a.skills[item]));
+        setNewData(prev => [...prev].sort((a: newDataType, b: newDataType) => b[item] - a[item]));
       } else {
-        setData(prev => [...prev].sort((a: RowData, b: RowData) => a[item] === b[item] ? 0 : a[item] < b[item] ? -1 : 1));
+        setNewData(prev => [...prev].sort((a: newDataType, b: newDataType) => a[item] === b[item] ? 0 : a[item] < b[item] ? -1 : 1));
       }
     } else {
       if (handleTitles(item)) {
-        setData(prev => [...prev].sort((a: RowData, b: RowData) => a.skills[item] - b.skills[item]));
+        setNewData(prev => [...prev].sort((a: newDataType, b: newDataType) => a[item] - b[item]));
       } else {
-        setData(prev => [...prev].sort((a: RowData, b: RowData) => a[item] === b[item] ? 0 : a[item] < b[item] ? 1 : -1));
+        setNewData(prev => [...prev].sort((a: newDataType, b: newDataType) => a[item] === b[item] ? 0 : a[item] < b[item] ? 1 : -1));
       }
     }
   }
 
+  console.log(455);
+
   return (
-    <section className='players_section'>
-      <table>
-        <thead>
-          <tr>
-            {headers.map((item, index) => <Header key={index} item={item} handleSort={handleSort} handleTitles={handleTitles} />)}
-          </tr>
-        </thead>
-        <tbody>
-          {newData.map((item, index) => <tr key={index}>
-            {Object.values(item).map((item, index) => <td key={index}>
-              {item}
-            </td>)}
-          </tr>)}
-        </tbody>
-      </table>
+    <section>
+      <div className='players_table'>
+        <table>
+          <thead>
+            <tr>
+              {headers.map((item, index) => <Header key={index} item={item} handleSort={handleSort} />)}
+            </tr>
+          </thead>
+          <tbody>
+            {newData.slice(qty * page, (page + 1) * qty).map((item, index) => <tr key={index}>
+              {Object.values(item).map((item, index) => <td key={index} className={skillsQualityStyle(item)}>
+                {item}
+              </td>)}
+            </tr>)}
+          </tbody>
+        </table>
+      </div>
+      <TablePagination
+        component={'div'}
+        count={newData.length}
+        onPageChange={(_, newPage: number) => setPage(newPage)}
+        page={page}
+        rowsPerPage={qty}
+        onRowsPerPageChange={(e: React.ChangeEvent<HTMLInputElement>) => { setQty(parseInt(e.target.value, 10)); setPage(0) }}
+        showFirstButton
+        showLastButton
+        sx={{ color: "var(--maincFontColor)" }}
+      />
     </section>
   )
-}
+})
 
 export default Table;
