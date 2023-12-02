@@ -26,16 +26,16 @@ export type Language = {
   img: string,
 }
 
-export type newDataType = {
-  [x: string]: number;
-  ST: number;
-  CD: number;
-  GK: number;
-  CM: number;
-  WA: number;
-  DM: number;
-  AM: number;
-  WM: number;
-  FB: number;
-  WB: number;
-}
+// export type newDataType = {
+//   [x: string]: number;
+//   ST: number;
+//   CD: number;
+//   GK: number;
+//   CM: number;
+//   WA: number;
+//   DM: number;
+//   AM: number;
+//   WM: number;
+//   FB: number;
+//   WB: number;
+// }
