@@ -20,17 +20,20 @@ const upload = multer({ storage: storage });
 app.post('/api', upload.single('htmlFile'), (req, res) => {
   try {
     if (req.file) {
-      const { lang } = req.body;
+      const { lang, positionForServer } = req.body;
       const htmlBuffer = req.file.buffer;
       const htmlString = htmlBuffer.toString('utf-8');
       const parsed = htmlToData(htmlString, lang);
+      const pos = JSON.parse(positionForServer);
 
       //const a = performance.now();
 
       if (Object.keys(parsed[0].attributes).length < 5) {
         res.status(500).json({ error: 'Use your language' });
       } else {
-        const coefData = calculateCoef(positions);
+        //console.log({ ...positions, ...positionForServer });
+
+        const coefData = calculateCoef({ ...positions, ...pos });
         const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes), attributes: translationToClient(item.attributes, lang) }));
         //console.log(performance.now() - a);
         res.status(200).json(tableData);

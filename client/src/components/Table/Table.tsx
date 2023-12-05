@@ -12,22 +12,25 @@ interface ITable {
   setData: React.Dispatch<React.SetStateAction<RowData[]>>,
   page: number,
   setPage: React.Dispatch<React.SetStateAction<number>>,
+  position: any,
 }
 
-const Table = memo(({ data, setData, page, setPage }: ITable) => {
+const Table = memo(({ data, setData, page, setPage, position }: ITable) => {
   const skills = data.length ? data[0].skills : [];
   const headers = data.length ? Object.keys({ ...skills, ...data[0] }).filter(item => item !== 'skills' && item !== "attributes") : [];
   const [qty, setQty] = useState(50); // quantity of rows inside table for pagination.
 
   const handleSort = (item: keyof typeof titles, toggle: boolean = false) => {
     if (!toggle) {
-      if (handleTitles(item)) {
+      if (handleTitles(item, position)) {
         setData(prev => [...prev].sort((a: RowData, b: RowData) => b.skills[item] - a.skills[item]));
       } else {
+        console.log(item);
+
         setData(prev => [...prev].sort((a: RowData, b: RowData) => a[item] === b[item] ? 0 : a[item] < b[item] ? -1 : 1));
       }
     } else {
-      if (handleTitles(item)) {
+      if (handleTitles(item, position)) {
         setData(prev => [...prev].sort((a: RowData, b: RowData) => a.skills[item] - b.skills[item]));
       } else {
         setData(prev => [...prev].sort((a: RowData, b: RowData) => a[item] === b[item] ? 0 : a[item] < b[item] ? 1 : -1));
@@ -38,7 +41,7 @@ const Table = memo(({ data, setData, page, setPage }: ITable) => {
   console.log(455);
 
   return (
-    <section>
+    <section className='table_section'>
       <div className='players_table'>
         <table>
           <thead>

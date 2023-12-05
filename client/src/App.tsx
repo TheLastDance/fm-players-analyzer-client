@@ -5,6 +5,7 @@ import './App.css'
 import Nav from './components/Nav/Nav';
 import Form from './components/Form/Form';
 import Table from './components/Table/Table';
+import Templates from './components/Templates/Templates';
 import { Language, RowData } from './types';
 
 
@@ -16,6 +17,7 @@ function App() {
   const [file, setFile] = useState<File | undefined>(undefined);
   const [data, setData] = useState<RowData[]>(initialData);
   const [lang, setLang] = useState(initialLang);
+  const [positionForServer, setPositionForServer] = useState<any>({});
   const [page, setPage] = useState(0); // page of pagination
 
 
@@ -31,6 +33,7 @@ function App() {
       const formData = new FormData();
       formData.append('htmlFile', file);
       formData.append('lang', lang);
+      formData.append('positionForServer', JSON.stringify(positionForServer));
       // https://fm-players-analyzer.onrender.com/api
       fetch('http://localhost:3000/api', {
         method: 'POST',
@@ -45,14 +48,15 @@ function App() {
     }
   }
 
-  console.log(file, data);
+  console.log(positionForServer);
 
   return (
     <>
       <Nav lang={lang} setLang={setLang} />
       <main>
+        <Templates lang={lang} setPositionForServer={setPositionForServer} />
         <Form handleFileChange={handleFileChange} handleSubmit={handleSubmit} />
-        {data.length ? <Table data={data} setData={setData} page={page} setPage={setPage} /> : null}
+        {data.length ? <Table data={data} setData={setData} page={page} setPage={setPage} position={positionForServer} /> : null}
       </main>
     </>
   )
