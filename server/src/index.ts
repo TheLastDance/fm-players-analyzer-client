@@ -9,6 +9,7 @@ import translationToClient from './utils/translationToClient';
 
 const app: Express = express();
 const PORT: string | number = process.env.PORT || 3000;
+const attributesLength = 47;
 
 app.use(cors());
 app.use(express.json()) // for parsing application/json
@@ -28,13 +29,14 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
 
       //const a = performance.now();
 
-      if (Object.keys(parsed[0].attributes).length < 5) {
+      if (Object.keys(parsed[0].attributes).length < attributesLength) {
         res.status(500).json({ error: 'Use your language' });
       } else {
         //console.log({ ...positions, ...positionForServer });
 
         const coefData = calculateCoef({ ...positions, ...pos });
         const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes), attributes: translationToClient(item.attributes, lang) }));
+
         //console.log(performance.now() - a);
         res.status(200).json(tableData);
       }

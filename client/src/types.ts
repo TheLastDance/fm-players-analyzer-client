@@ -30,7 +30,7 @@ export type RowData = {
 }
 
 export type Language = {
-  lang: 'en' | 'ru',
+  lang: 'en' | 'ru' | 'es',
   img: string,
 }
 
