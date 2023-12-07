@@ -8,12 +8,13 @@ import { Button } from '@mui/material';
 
 interface ITemplates {
   lang: Language['lang'],
-  setPositionForServer: React.Dispatch<React.SetStateAction<any>>,
 }
 
-const Templates = ({ lang, setPositionForServer }: ITemplates) => {
+const Templates = ({ lang }: ITemplates) => {
+  const storedTemplates = localStorage.getItem('templates');
+  const positions = storedTemplates ? JSON.parse(storedTemplates) : [];
   const [createNew, , handleFalse, handleTrue] = useToggle();
-  const [templatesArray, setTemplatesArray] = useState<ITemplateOne[]>([]);
+  const [templatesArray, setTemplatesArray] = useState<ITemplateOne[]>(positions);
   const maxTemplates = 5;
 
   const handleToggleArray = (indexClicked: number) => {
@@ -22,7 +23,7 @@ const Templates = ({ lang, setPositionForServer }: ITemplates) => {
   }
 
   const handleCreate = () => {
-    setTemplatesArray(prev => [...prev].map((item) => ({ ...item, toggled: false })));
+    setTemplatesArray(prev => [...prev].map((item) => ({ ...item, toggled: false }))); // untoggle current template
     handleTrue();
   }
 
@@ -32,7 +33,7 @@ const Templates = ({ lang, setPositionForServer }: ITemplates) => {
   return (
     <section className='template_section'>
       <div className="header_2">
-        <h1>Templates {`(${templatesArray.length}/5)`}</h1>
+        <h1>Templates {`(${templatesArray.length}/${maxTemplates})`}</h1>
       </div>
       <div className="templates_menu">
         <div className="templates_group">
@@ -49,7 +50,6 @@ const Templates = ({ lang, setPositionForServer }: ITemplates) => {
           <Template
             key={item.id}
             lang={lang}
-            setPositionForServer={setPositionForServer}
             handleFalse={handleFalse}
             templatesArray={templatesArray}
             setTemplatesArray={setTemplatesArray}
@@ -60,7 +60,6 @@ const Templates = ({ lang, setPositionForServer }: ITemplates) => {
       {
         createNew && <Template
           lang={lang}
-          setPositionForServer={setPositionForServer}
           handleFalse={handleFalse}
           templatesArray={templatesArray}
           setTemplatesArray={setTemplatesArray}

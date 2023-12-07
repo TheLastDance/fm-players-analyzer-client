@@ -21,6 +21,7 @@ const Table = memo(({ data, setData, page, setPage, position }: ITable) => {
   const [qty, setQty] = useState(50); // quantity of rows inside table for pagination.
 
   const handleSort = (item: keyof typeof titles, toggle: boolean = false) => {
+
     if (!toggle) {
       if (handleTitles(item, position)) {
         setData(prev => [...prev].sort((a: RowData, b: RowData) => b.skills[item] - a.skills[item]));

@@ -1,23 +1,23 @@
-import { useState, useId } from 'react';
+import { useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import DroppableComponent from '../Template/DroppableComponent/DroppableComponent';
 import { attributesFull } from '../../../data/attributes';
-import { coefficients } from '../../../data/coefficients';
 import { Language, ITemplateArray, TiersEnum, ITemplateOne } from '../../../types';
 import { Button } from '@mui/material';
 
 
 interface ITemplate {
   lang: Language['lang'],
-  setPositionForServer: React.Dispatch<React.SetStateAction<any>>,
   handleFalse: () => void,
   setTemplatesArray: React.Dispatch<React.SetStateAction<ITemplateOne[]>>,
   templatesArray: ITemplateOne[],
   item?: ITemplateOne,
 }
 
-const Template = ({ lang, setPositionForServer, handleFalse, templatesArray, setTemplatesArray, item }: ITemplate) => {
-  const id = useId();
+const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }: ITemplate) => {
+  const id = Date.now().toString();
+  const [error, setError] = useState("");
+  // if item is undefined it means that we use this component to create new template and not to edit created one.
   const [template, setTemplates] = useState<ITemplateOne>(item || {
     name: "",
     toggled: false,
@@ -45,7 +45,6 @@ const Template = ({ lang, setPositionForServer, handleFalse, templatesArray, set
       }
     ]
   });
-  const [error, setError] = useState("");
 
   const handleDragDrop = (res: DropResult) => {
     const { source, destination } = res;
@@ -90,46 +89,21 @@ const Template = ({ lang, setPositionForServer, handleFalse, templatesArray, set
   console.log(template, template.name);
 
   const handleButton = () => {
+    const templates = [...templatesArray];
 
     if (templatesArray.filter(item => item.name === template.name && item.id !== template.id).length) {
       return setError("Names of templates must be unique");
     }
 
-    const positions = { ...template };
-    const { name } = positions;
-    const filtered: any = positions.templates.filter(item => item.name !== TiersEnum.noTier);
-    const changed: any = filtered.map((item: any) => ({
-      [item.name]: Object.fromEntries([...item.attributes.map((el: any) => ([el, coefficients[item.name as TiersEnum.tier_1]]))])
-    }));
-
-    const [tier_1, tier_2, tier_3, tier_4] = changed;
-
     if (item) {
-      setPositionForServer((prev: any) => {
-        delete prev[`#${item.name}`];
-        return {
-          ...prev,
-          [`#${name}`]: {
-            ...tier_1,
-            ...tier_2,
-            ...tier_3,
-            ...tier_4,
-          }
-        }
-      });
-      setTemplatesArray(prev => [...prev].map(el => el.name === item.name ? template : el));
+      const newTemplates = templates.map(el => el.name === item.name ? template : el);
+      setTemplatesArray(newTemplates);
+      localStorage.setItem("templates", JSON.stringify(newTemplates.map((item) => ({ ...item, toggled: false }))));
       handleCloseBtn();
     } else {
-      setPositionForServer((prev: any) => ({
-        ...prev,
-        [`#${name}`]: {
-          ...tier_1,
-          ...tier_2,
-          ...tier_3,
-          ...tier_4,
-        }
-      }));
-      setTemplatesArray(prev => [...prev, template]);
+      const newTemplates = [...templates, template];
+      setTemplatesArray(newTemplates);
+      localStorage.setItem("templates", JSON.stringify(newTemplates.map((item) => ({ ...item, toggled: false }))));
       handleFalse();
     }
   }
@@ -137,6 +111,14 @@ const Template = ({ lang, setPositionForServer, handleFalse, templatesArray, set
   const handleCloseBtn = () => {
     setTemplatesArray(prev => [...prev].map((item) => ({ ...item, toggled: false })));
     handleFalse();
+  }
+
+  const handleDeleteTemplate = () => {
+    if (item) {
+      const newTemplates = templatesArray.filter(el => el.id !== item.id);
+      setTemplatesArray(templatesArray.filter(el => el.id !== item.id));
+      localStorage.setItem("templates", JSON.stringify(newTemplates));
+    }
   }
 
 
@@ -163,6 +145,7 @@ const Template = ({ lang, setPositionForServer, handleFalse, templatesArray, set
         </div>
       </div>
       <div className='template_save_button'>
+        {item && <Button variant='contained' color='error' onClick={handleDeleteTemplate}>Delete Template</Button>}
         <Button disabled={!template.name || template.templates[0].attributes.length === 47} onClick={handleButton} variant='contained' >Save</Button>
       </div>
     </DragDropContext>
