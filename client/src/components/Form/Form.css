@@ -10,7 +10,7 @@ form label {
 
 form input {
   margin-top: 10px;
-  font-size: var(--inputFS);
+  font-size: var(--mainFS);
   font-weight: 500;
   cursor: pointer;
   display: block;
@@ -32,11 +32,11 @@ input::file-selector-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  transition: 0.4s ease-in-out;
 }
 
 input::file-selector-button:hover {
   color: var(--maincFontColor);
   background: transparent;
   border-right: 1px solid var(--maincFontColor);
+  transition: 0.4s ease-in-out;
 }

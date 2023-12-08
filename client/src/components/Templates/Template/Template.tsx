@@ -1,10 +1,13 @@
+import './Template.css';
 import { useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import DroppableComponent from '../Template/DroppableComponent/DroppableComponent';
 import { attributesFull } from '../../../data/attributes';
 import { Language, ITemplateArray, TiersEnum, ITemplateOne } from '../../../types';
-import { Button } from '@mui/material';
-
+import { Button, TextField } from '@mui/material';
+import { textFieldStyle, buttonDisabled } from './MuiStyles';
+import trash_icon from "../../../assets/trash_icon.svg";
+import save_icon from "../../../assets/save_icon.svg";
 
 interface ITemplate {
   lang: Language['lang'],
@@ -46,6 +49,7 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
     ]
   });
 
+  // handles drag and drop logic
   const handleDragDrop = (res: DropResult) => {
     const { source, destination } = res;
     const templates = [...template.templates];
@@ -88,6 +92,7 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
 
   console.log(template, template.name);
 
+  // saves a template in array and storage and closes template component
   const handleButton = () => {
     const templates = [...templatesArray];
 
@@ -108,11 +113,13 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
     }
   }
 
+  // closes template
   const handleCloseBtn = () => {
     setTemplatesArray(prev => [...prev].map((item) => ({ ...item, toggled: false })));
     handleFalse();
   }
 
+  // deletes template from array and storage
   const handleDeleteTemplate = () => {
     if (item) {
       const newTemplates = templatesArray.filter(el => el.id !== item.id);
@@ -124,29 +131,42 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
 
   return (
     <DragDropContext onDragEnd={handleDragDrop} >
-      <div>
-        <div className='input_name'>
-          <label>
-            <input maxLength={7} type="text" value={template.name} onChange={(e) => setTemplates(prev => ({ ...prev, name: e.target.value }))} />
-          </label>
-        </div>
-        <Button variant='text' onClick={handleCloseBtn}>
+      <div className='template_input_cls_container'>
+        <TextField
+          sx={textFieldStyle}
+          error={error ? true : false}
+          onChange={(e) => setTemplates(prev => ({ ...prev, name: e.target.value }))}
+          id="outlined-error-helper-text"
+          label="type template name"
+          value={template.name}
+          helperText={error}
+          size='small'
+          inputProps={{
+            maxLength: 7,
+            type: "text",
+          }}
+        />
+        <Button variant='text' color='inherit' size='large' onClick={handleCloseBtn}>
           X
         </Button>
       </div>
-      {error && <p>{error}</p>}
       <div className='droppables_container'>
         <div className='droppable_block'>
           {template.templates.map((item) =>
-            <div key={item.name} >
-              <DroppableComponent name={item.name} items={item.attributes} id={item.name} lang={lang} />
-            </div>
+            <DroppableComponent key={item.name} name={item.name} items={item.attributes} id={item.name} lang={lang} />
           )}
         </div>
       </div>
-      <div className='template_save_button'>
-        {item && <Button variant='contained' color='error' onClick={handleDeleteTemplate}>Delete Template</Button>}
-        <Button disabled={!template.name || template.templates[0].attributes.length === 47} onClick={handleButton} variant='contained' >Save</Button>
+      <div className='template_save_delete_buttons'>
+        {item ? <Button variant='contained' color='error' startIcon={<img src={trash_icon} />} onClick={handleDeleteTemplate}>Delete Template</Button> : <span></span>}
+        <Button
+          disabled={!template.name || template.templates[0].attributes.length === 47}
+          endIcon={<img src={save_icon} />}
+          sx={buttonDisabled}
+          onClick={handleButton}
+          variant='contained' >
+          Save
+        </Button>
       </div>
     </DragDropContext>
   )

@@ -30,12 +30,12 @@ table {
   color: var(--maincFontColor);
   background: var(--darkColor);
   cursor: pointer;
-  transition: 0.3s ease-in-out;
 }
 
 .players_table th:hover {
   text-decoration: underline;
   color: var(--blueColor);
+  transition: 0.3s ease-in-out;
 }
 
 td {
@@ -63,4 +63,14 @@ tbody tr:hover {
 
 .skill_red {
   color: rgb(116, 19, 19);
+}
+
+@media(max-width:900px) {
+  .players_table th {
+    padding: 5px 20px;
+  }
+
+  td {
+    padding: 0;
+  }
 }

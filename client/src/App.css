@@ -4,6 +4,7 @@ body {
   color: var(--maincFontColor);
   font-weight: 500;
   font-family: Roboto;
+  font-size: var(--mainFS);
 }
 
 #root {

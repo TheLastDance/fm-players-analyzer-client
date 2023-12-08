@@ -56,7 +56,7 @@ function App() {
     }
   }
 
-  console.log(templateArraytoServerObj(localStorage.getItem('templates')));
+  console.log(data);
 
   return (
     <>

@@ -4,6 +4,7 @@ import { Language, ITemplateOne } from '../../types';
 import Template from './Template/Template';
 import { useToggle } from '../../customHooks/useToggle';
 import { Button } from '@mui/material';
+import { buttonDisabled } from './Template/MuiStyles';
 
 
 interface ITemplates {
@@ -31,9 +32,9 @@ const Templates = ({ lang }: ITemplates) => {
 
 
   return (
-    <section className='template_section'>
-      <div className="header_2">
-        <h1>Templates {`(${templatesArray.length}/${maxTemplates})`}</h1>
+    <section className='templates_section'>
+      <div className="templates_header">
+        <h2>Templates {`(${templatesArray.length}/${maxTemplates})`}</h2>
       </div>
       <div className="templates_menu">
         <div className="templates_group">
@@ -41,7 +42,7 @@ const Templates = ({ lang }: ITemplates) => {
             {item.name}
           </Button>)}
         </div>
-        <Button variant='outlined' disabled={templatesArray.length >= maxTemplates} onClick={handleCreate} >
+        <Button sx={buttonDisabled} variant='outlined' disabled={templatesArray.length >= maxTemplates} onClick={handleCreate} >
           Create
         </Button>
       </div>

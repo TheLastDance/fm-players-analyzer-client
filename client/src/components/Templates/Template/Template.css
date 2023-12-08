@@ -1,0 +1,45 @@
+.template_input_cls_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 0;
+}
+
+/* 
+.droppables_container {
+  width: 100%;
+  min-height: 300px;
+} */
+
+.droppable_block {
+  display: grid;
+  grid-template-areas:
+    "no_tier tier_1"
+    "no_tier tier_2"
+    "no_tier tier_3"
+    "no_tier tier_4";
+  grid-template-columns: 300px 1fr;
+}
+
+.template_save_delete_buttons {
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+@media(max-width:600px) {
+  .droppable_block {
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+
+@media(max-width:350px) {
+  .template_save_delete_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    row-gap: 10px;
+  }
+}
