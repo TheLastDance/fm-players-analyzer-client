@@ -93,6 +93,7 @@ export interface ITemplateOne {
   name: string,
   toggled: boolean,
   id: string,
+  checked: boolean,
   templates: ITemplateArray[],
 }
 

@@ -5,7 +5,6 @@ import htmlToData from './utils/parseHtmlToData';
 import calculateSkill from './utils/calculateSkill';
 import { positions } from './data/positions';
 import calculateCoef from './utils/calculateCoef';
-import translationToClient from './utils/translationToClient';
 
 const app: Express = express();
 const PORT: string | number = process.env.PORT || 3000;

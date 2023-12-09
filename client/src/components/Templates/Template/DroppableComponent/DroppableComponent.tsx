@@ -12,13 +12,19 @@ interface IDroppableComponent {
 
 function DroppableComponent({ name, items, id, lang }: IDroppableComponent) {
   return (
-    <div className={`store_container store_container_${name}`}>
-      <div className="store_header">
-        <h3>{name}</h3>
-      </div>
-      <Droppable droppableId={id}>
-        {(provided) => (
-          <div className={`store_items`} {...provided.droppableProps} ref={provided.innerRef}>
+
+    <Droppable droppableId={id}>
+      {(provided) => (
+        <div className={`store_container store_container_${name}`} {...provided.droppableProps} ref={provided.innerRef}>
+          <div className="store_header">
+            <h3>
+              {name}
+            </h3>
+            <span>
+              {name === "tier_1" ? " (Most significant skills)" : name === "tier_4" ? " (Least significant skills)" : name === "no_tier" ? " (Unnecessary skills)" : ""}
+            </span>
+          </div>
+          <div className={`store_items`}>
             {items.map((item, index) => <Draggable draggableId={item} index={index} key={item}>
               {(provided) => (
                 <div className="store_item" {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef} >
@@ -28,9 +34,10 @@ function DroppableComponent({ name, items, id, lang }: IDroppableComponent) {
             </Draggable>)}
             {provided.placeholder}
           </div>
-        )}
-      </Droppable>
-    </div>
+        </div>
+      )}
+    </Droppable>
+
   )
 }
 

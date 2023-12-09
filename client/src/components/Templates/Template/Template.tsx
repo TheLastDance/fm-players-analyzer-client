@@ -4,8 +4,8 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import DroppableComponent from '../Template/DroppableComponent/DroppableComponent';
 import { attributesFull } from '../../../data/attributes';
 import { Language, ITemplateArray, TiersEnum, ITemplateOne } from '../../../types';
-import { Button, TextField } from '@mui/material';
-import { textFieldStyle, buttonDisabled } from './MuiStyles';
+import { Button, TextField, Checkbox, FormControlLabel } from '@mui/material';
+import { textFieldStyle, buttonDisabled, BpIcon, BpCheckedIcon } from './MuiStyles';
 import trash_icon from "../../../assets/trash_icon.svg";
 import save_icon from "../../../assets/save_icon.svg";
 
@@ -25,6 +25,7 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
     name: "",
     toggled: false,
     id: id,
+    checked: true,
     templates: [
       {
         name: TiersEnum.noTier,
@@ -128,24 +129,36 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
     }
   }
 
-
   return (
     <DragDropContext onDragEnd={handleDragDrop} >
       <div className='template_input_cls_container'>
-        <TextField
-          sx={textFieldStyle}
-          error={error ? true : false}
-          onChange={(e) => setTemplates(prev => ({ ...prev, name: e.target.value }))}
-          id="outlined-error-helper-text"
-          label="type template name"
-          value={template.name}
-          helperText={error}
-          size='small'
-          inputProps={{
-            maxLength: 7,
-            type: "text",
-          }}
-        />
+        <div className="template_input_cls-left">
+          <TextField
+            sx={textFieldStyle}
+            error={error ? true : false}
+            onChange={(e) => setTemplates(prev => ({ ...prev, name: e.target.value }))}
+            id="outlined-error-helper-text"
+            label="type template name"
+            value={template.name}
+            helperText={error}
+            size='small'
+            inputProps={{
+              maxLength: 7,
+              type: "text",
+            }}
+          />
+          <FormControlLabel
+            label="use a template"
+            control={
+              <Checkbox
+                icon={<BpIcon />}
+                checkedIcon={<BpCheckedIcon />}
+                checked={template.checked}
+                onChange={() => setTemplates(prev => ({ ...prev, checked: !prev.checked }))}
+              />
+            }
+          />
+        </div>
         <Button variant='text' color='inherit' size='large' onClick={handleCloseBtn}>
           X
         </Button>

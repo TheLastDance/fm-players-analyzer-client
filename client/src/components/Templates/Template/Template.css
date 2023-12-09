@@ -5,12 +5,6 @@
   margin: 25px 0;
 }
 
-/* 
-.droppables_container {
-  width: 100%;
-  min-height: 300px;
-} */
-
 .droppable_block {
   display: grid;
   grid-template-areas:

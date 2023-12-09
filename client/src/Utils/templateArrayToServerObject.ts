@@ -1,10 +1,14 @@
 import { ITemplateOne, TiersEnum } from "../types";
 import { coefficients } from "../data/coefficients";
 
+function filterChecked(arr: ITemplateOne[]) {
+  return arr.filter(item => item.checked);
+}
+
 export const templateArraytoServerObj = (dataFromStorage: string | null) => {
 
   if (dataFromStorage) {
-    const templateParsed: ITemplateOne[] = JSON.parse(dataFromStorage);
+    const templateParsed: ITemplateOne[] = filterChecked(JSON.parse(dataFromStorage));
     const obj: Record<string, never> | any = {};
 
     for (const item of templateParsed) {

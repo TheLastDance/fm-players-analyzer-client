@@ -5,6 +5,7 @@ import Template from './Template/Template';
 import { useToggle } from '../../customHooks/useToggle';
 import { Button } from '@mui/material';
 import { buttonDisabled } from './Template/MuiStyles';
+import checked_icon from "../../assets/check.svg";
 
 
 interface ITemplates {
@@ -16,7 +17,7 @@ const Templates = ({ lang }: ITemplates) => {
   const positions = storedTemplates ? JSON.parse(storedTemplates) : [];
   const [createNew, , handleFalse, handleTrue] = useToggle();
   const [templatesArray, setTemplatesArray] = useState<ITemplateOne[]>(positions);
-  const maxTemplates = 5;
+  const maxTemplates = 10;
 
   const handleToggleArray = (indexClicked: number) => {
     setTemplatesArray(prev => [...prev].map((item, index) => indexClicked === index ? ({ ...item, toggled: true }) : ({ ...item, toggled: false })));
@@ -38,7 +39,13 @@ const Templates = ({ lang }: ITemplates) => {
       </div>
       <div className="templates_menu">
         <div className="templates_group">
-          {templatesArray.map((item, index) => <Button variant='contained' size='small' color='success' onClick={() => handleToggleArray(index)} key={item.id} >
+          {templatesArray.map((item, index) => <Button
+            variant='contained'
+            size='small'
+            color='success'
+            onClick={() => handleToggleArray(index)} key={item.id}
+            startIcon={item.checked ? <img src={checked_icon} /> : null}
+          >
             {item.name}
           </Button>)}
         </div>
