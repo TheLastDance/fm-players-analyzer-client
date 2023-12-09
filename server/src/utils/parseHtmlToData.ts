@@ -36,7 +36,7 @@ function htmlToData(htmlFile: string, lang: keyof typeof attributes = 'en') {
           rowData.Nationality = cellText;
         } else {
           const key = language[header as keyof ITranslationPairs] as keyof ITranslationPairs;
-          rowData.attributes[key] = Number(cellText);
+          rowData.attributes[key] = cellText;
         }
       } else {
         rowData[header] = cellText;

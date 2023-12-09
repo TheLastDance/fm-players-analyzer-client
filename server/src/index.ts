@@ -35,7 +35,7 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
         //console.log({ ...positions, ...positionForServer });
 
         const coefData = calculateCoef({ ...positions, ...pos });
-        const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes), attributes: translationToClient(item.attributes, lang) }));
+        const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes) }));
 
         //console.log(performance.now() - a);
         res.status(200).json(tableData);

@@ -8,6 +8,7 @@ interface IRow {
 const Row = ({ item }: IRow) => {
   // eslint-disable-next-line
   const { attributes, skills, ...rest } = item;
+  //console.log(rest);
 
   return (
     <tr>

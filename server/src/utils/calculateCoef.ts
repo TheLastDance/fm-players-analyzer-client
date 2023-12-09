@@ -20,7 +20,7 @@ function calculateCoef(position: IPositions): ICalculateCoef {
 
   return {
     keysOfPositions: keysArray, // array of positions namings
-    mergedObj: mergedObj, // object of merged attributes in tiers
+    mergedObj: mergedObj, // array object of merged attributes in tiers
     coef: coef // calculated coefficient of merged object
   }
 
