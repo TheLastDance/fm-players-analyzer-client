@@ -1,4 +1,5 @@
 export const titles = {
+  Max: "Best position rating",
   ST: "Center Forward",
   CD: "Central Defender",
   GK: "Goalkeeper",

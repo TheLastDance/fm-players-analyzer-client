@@ -1,11 +1,14 @@
 import './Table.css'
 import { useState, memo } from 'react';
+import { useToggle } from '../../customHooks/useToggle';
 import { RowData } from '../../types'
 import { titles } from '../../data/positionsTitles';
 import Header from './Header/Header';
 import { TablePagination } from '@mui/material';
 import { handleTitles } from '../../Utils/handleTitles';
 import Row from './Row/Row';
+import fullscreen_icon from "../../assets/fullscreen_icon.svg";
+import resize_icon from "../../assets/resize_icon.svg";
 
 interface ITable {
   data: RowData[],
@@ -19,6 +22,7 @@ const Table = memo(({ data, setData, page, setPage, position }: ITable) => {
   const skills = data.length ? data[0].skills : [];
   const headers = data.length ? Object.keys({ ...skills, ...data[0] }).filter(item => item !== 'skills' && item !== "attributes") : [];
   const [qty, setQty] = useState(50); // quantity of rows inside table for pagination.
+  const [isResized, toggleResize] = useToggle();
 
   const handleSort = (item: keyof typeof titles, toggle: boolean = false) => {
 
@@ -42,12 +46,14 @@ const Table = memo(({ data, setData, page, setPage, position }: ITable) => {
   console.log(455);
 
   return (
-    <section className='table_section'>
+    <section className={isResized ? 'table_section resized_table' : 'table_section'}>
+      <span className='resize_table_icon' title='resize table' onClick={toggleResize} >{isResized ? <img src={resize_icon} /> : <img src={fullscreen_icon} />}</span>
       <div className='players_table'>
         <table>
           <thead>
             <tr>
-              {headers.map((item, index) => <Header key={index} item={item} handleSort={handleSort} />)}
+              {headers.map((item, index) =>
+                <Header key={index} item={item} handleSort={handleSort} />)}
             </tr>
           </thead>
           <tbody>

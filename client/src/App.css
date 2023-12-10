@@ -8,7 +8,7 @@ body {
 }
 
 #root {
-  max-width: 1250px;
+  max-width: var(--rootContainerSize);
   margin: 0 auto;
 }
 
@@ -26,14 +26,6 @@ ul li {
 ul li span {
   padding: 0 10px;
 }
-
-/* header,
-.templates_section,
-form,
-.table_section {
-  max-width: 1250px;
-  margin: 0 auto;
-} */
 
 @media(max-width: 1250px) {
   #root {

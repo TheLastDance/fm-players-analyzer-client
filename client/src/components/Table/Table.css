@@ -6,20 +6,35 @@
   align-items: center;
 }
 
+.resized_table {
+  width: calc(100svw - 20px);
+  transform: translate(calc((-100svw + 20px + var(--rootContainerSize))/2));
+}
+
+.resize_table_icon {
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+}
+
+.resize_table_icon:hover {
+  transform: scale(1.3);
+}
+
 .players_table {
   width: 100%;
   height: 600px;
   margin: 25px auto;
-  background: var(--tableTdColor);
   border-radius: 10px;
-  padding-bottom: 10px;
   color: black;
   overflow-x: scroll;
+  position: relative;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  background: var(--tableTdColor);
 }
 
 .players_table th {
@@ -37,6 +52,13 @@ table {
   text-decoration: underline;
   color: var(--blueColor);
   transition: 0.3s ease-in-out;
+}
+
+.players_table table thead tr th:nth-child(1) span {
+  position: absolute;
+  z-index: 5;
+  left: 3px;
+  top: 2px;
 }
 
 td {
@@ -64,6 +86,17 @@ tbody tr:hover {
 
 .skill_red {
   color: rgb(116, 19, 19);
+}
+
+@media(max-width:1250px) {
+  .resized_table {
+    width: 100%;
+    transform: unset;
+  }
+
+  .resize_table_icon {
+    display: none;
+  }
 }
 
 @media(max-width:900px) {

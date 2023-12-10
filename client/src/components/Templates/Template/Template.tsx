@@ -130,7 +130,7 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
   }
 
   return (
-    <DragDropContext onDragEnd={handleDragDrop} >
+    <>
       <div className='template_input_cls_container'>
         <div className="template_input_cls-left">
           <TextField
@@ -165,9 +165,11 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
       </div>
       <div className='droppables_container'>
         <div className='droppable_block'>
-          {template.templates.map((item) =>
-            <DroppableComponent key={item.name} name={item.name} items={item.attributes} id={item.name} lang={lang} />
-          )}
+          <DragDropContext onDragEnd={handleDragDrop} >
+            {template.templates.map((item) =>
+              <DroppableComponent key={item.name} name={item.name} items={item.attributes} id={item.name} lang={lang} />
+            )}
+          </DragDropContext>
         </div>
       </div>
       <div className='template_save_delete_buttons'>
@@ -181,7 +183,7 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
           Save
         </Button>
       </div>
-    </DragDropContext>
+    </>
   )
 }
 

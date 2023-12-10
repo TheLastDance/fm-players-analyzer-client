@@ -31,13 +31,11 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
       if (Object.keys(parsed[0].attributes).length < attributesLength) {
         res.status(500).json({ error: 'Use your language' });
       } else {
-        //console.log({ ...positions, ...positionForServer });
-
         const coefData = calculateCoef({ ...positions, ...pos });
         const tableData = parsed.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes) }));
-
+        const maxData = tableData.map(item => ({ ...item, skills: { Max: Math.max(...Object.values(item.skills)), ...item.skills } }))
         //console.log(performance.now() - a);
-        res.status(200).json(tableData);
+        res.status(200).json(maxData);
       }
     }
   } catch (error) {

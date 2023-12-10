@@ -5,6 +5,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --scaleFactor: 1;
+  --rootContainerSize: 1250px;
   --h1FS: calc(32px * var(--scaleFactor));
   --mainFS: calc(16px * var(--scaleFactor));
   --templateFS: calc(15px * var(--scaleFactor));

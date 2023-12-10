@@ -24,16 +24,16 @@ function DroppableComponent({ name, items, id, lang }: IDroppableComponent) {
               {name === "tier_1" ? " (Most significant skills)" : name === "tier_4" ? " (Least significant skills)" : name === "no_tier" ? " (Unnecessary skills)" : ""}
             </span>
           </div>
-          <div className={`store_items`}>
+          <ul className='store_items'>
             {items.map((item, index) => <Draggable draggableId={item} index={index} key={item}>
               {(provided) => (
-                <div className="store_item" {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef} >
+                <li className="store_item" {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef} >
                   <p title={attributesFull[lang][item as keyof ITranslationPairs]} >{attributesFull[lang][item as keyof ITranslationPairs]}</p>
-                </div>
+                </li>
               )}
             </Draggable>)}
             {provided.placeholder}
-          </div>
+          </ul>
         </div>
       )}
     </Droppable>

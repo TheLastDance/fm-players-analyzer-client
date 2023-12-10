@@ -8,11 +8,11 @@
 .droppable_block {
   display: grid;
   grid-template-areas:
-    "no_tier tier_1"
-    "no_tier tier_2"
-    "no_tier tier_3"
-    "no_tier tier_4";
-  grid-template-columns: 300px 1fr;
+    "no_tier no_tier no_tier no_tier"
+    "tier_1 tier_2 tier_3 tier_4";
+  grid-template-rows: 250px 330px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .template_save_delete_buttons {
@@ -21,9 +21,20 @@
   justify-content: space-between;
 }
 
-@media(max-width:600px) {
+@media(max-width:800px) {
   .droppable_block {
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 200px 280px;
+    gap: 10px;
+  }
+}
+
+@media(max-width:700px) {
+  .droppable_block {
+    grid-template-areas:
+      "no_tier no_tier no_tier no_tier"
+      "tier_1 tier_1 tier_2 tier_2"
+      "tier_3 tier_3 tier_4 tier_4";
+    grid-template-rows: 200px 250px 250px;
   }
 }
 
