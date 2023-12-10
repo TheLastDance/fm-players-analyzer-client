@@ -8,6 +8,7 @@ import Table from './components/Table/Table';
 import Templates from './components/Templates/Templates';
 import { Language, RowData } from './types';
 import { templateArraytoServerObj } from './Utils/templateArrayToServerObject';
+import { LoadingOverlay } from './portals/LoadingOverlay/LoadingOverlay';
 
 
 function App() {
@@ -22,17 +23,18 @@ function App() {
   const [lang, setLang] = useState(initialLang);
   const [positionForServer, setPositionForServer] = useState(positions);
   const [page, setPage] = useState(0); // page of pagination
-
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFile = e.target.files?.[0];
-    setFile(newFile);
+    if (newFile?.type === "text/html") setFile(newFile);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (file) {
+      setIsLoading(true)
       const formData = new FormData();
       const serverPositions = templateArraytoServerObj(localStorage.getItem('templates'));
       localStorage.setItem('serverTemplates', serverPositions);
@@ -53,6 +55,8 @@ function App() {
           localStorage.setItem('data', JSON.stringify(json));
           setPage(0);
         })
+        .catch(err => console.log(err))
+        .finally(() => setIsLoading(false))
     }
   }
 
@@ -66,6 +70,7 @@ function App() {
         <Form handleFileChange={handleFileChange} handleSubmit={handleSubmit} />
         {data.length ? <Table data={data} setData={setData} page={page} setPage={setPage} position={positionForServer} /> : null}
       </main>
+      <LoadingOverlay isVisible={isLoading} />
     </>
   )
 }
