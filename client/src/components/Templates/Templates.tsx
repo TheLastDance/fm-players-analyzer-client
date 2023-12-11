@@ -1,5 +1,5 @@
 import './Templates.css'
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Language, ITemplateOne } from '../../types';
 import Template from './Template/Template';
 import { useToggle } from '../../customHooks/useToggle';
@@ -12,7 +12,7 @@ interface ITemplates {
   lang: Language['lang'],
 }
 
-const Templates = ({ lang }: ITemplates) => {
+const Templates = memo(({ lang }: ITemplates) => {
   const storedTemplates = localStorage.getItem('templates');
   const positions = storedTemplates ? JSON.parse(storedTemplates) : [];
   const [createNew, , handleFalse, handleTrue] = useToggle();
@@ -75,6 +75,6 @@ const Templates = ({ lang }: ITemplates) => {
       }
     </section>
   )
-}
+})
 
 export default Templates;
