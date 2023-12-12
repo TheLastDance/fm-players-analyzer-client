@@ -5,6 +5,8 @@ export const countTags = (file: File | undefined): Promise<number> | undefined =
       const reader = new FileReader();
 
       reader.onload = function (e) {
+        // const size = e.total;
+        // console.log(size);
         const content = e.target?.result;
         const tempDiv = document.createElement('div');
 

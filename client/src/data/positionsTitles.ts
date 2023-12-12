@@ -11,3 +11,7 @@ export const titles = {
   FB: "Full-Back (Lateral)",
   WB: "Wing-Back (Wing Defender)",
 }
+
+export const wings = ['WA', 'WM', 'FB', 'WB'];
+
+export const centers = ['ST', 'CD', 'GK', 'CM', 'DM', 'AM']

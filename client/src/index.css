@@ -5,6 +5,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --scaleFactor: 1;
+  --scaleOverlayFactor: 1;
   --rootContainerSize: 1250px;
   --h1FS: calc(32px * var(--scaleFactor));
   --mainFS: calc(16px * var(--scaleFactor));
@@ -16,6 +17,7 @@
   --darkColor: rgb(41, 44, 46);
   --blueColor: #1976d2;
   --templateAttributeColor: #2e7d32;
+  --errorColor: #d32f2f;
 }
 
 * {
@@ -27,11 +29,13 @@
 @media(max-width:900px) {
   :root {
     --scaleFactor: 0.9;
+    --scaleOverlayFactor: 0.7;
   }
 }
 
 @media(max-width:500px) {
   :root {
     --scaleFactor: 0.85;
+    --scaleOverlayFactor: 0.5;
   }
 }

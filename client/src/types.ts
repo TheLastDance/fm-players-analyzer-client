@@ -11,8 +11,9 @@ export type Attribute = {
 }
 
 export type RowData = {
-  attributes: Attribute;
+  attributes: ITranslationPairs;
   skills: {
+    Max: number,
     ST: number,
     CD: number,
     GK: number,
@@ -26,7 +27,7 @@ export type RowData = {
     [key: string]: number;
   }
 } & {
-  [key: string]: number;
+  [key: string]: string;
 }
 
 export type Language = {

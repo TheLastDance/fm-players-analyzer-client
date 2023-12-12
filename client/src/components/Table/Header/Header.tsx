@@ -15,7 +15,7 @@ const Header = ({ item, handleSort }: IHeader) => {
       title={handleTitles(item as keyof typeof titles)}
       onClick={() => { handleSort(item as keyof typeof titles, toggle); handleToggle() }}
     >
-      {item}
+      <button>{item}</button>
     </th>
   )
 }

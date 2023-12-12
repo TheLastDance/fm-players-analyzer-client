@@ -1,0 +1,72 @@
+.player-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  color: white;
+}
+
+.overlay_bg {
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.9;
+  display: block;
+  position: fixed;
+  z-index: 1;
+}
+
+.close_button_container {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+}
+
+.player-overlay_container {
+  max-width: var(--rootContainerSize);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.player_overlay_info_positions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-overlay_info {
+  display: flex;
+}
+
+.player-overlay_info .player_photo {
+  width: calc(var(--scaleOverlayFactor) * 200px);
+  height: calc(var(--scaleOverlayFactor) * 200px);
+  margin-right: 15px;
+}
+
+.player-overlay_info .info {
+  max-height: calc(var(--scaleOverlayFactor) * 450px);
+  max-width: 300px;
+  overflow: auto;
+  list-style: none;
+}
+
+.positions_tablet {
+  background-image: url('../../assets/football_table.jpg');
+  background-position: center;
+  background-size: cover;
+  width: calc(var(--scaleOverlayFactor) * 400px);
+  height: calc(var(--scaleOverlayFactor) * 250px);
+  position: relative;
+  margin-top: 25px;
+}
+
+.stats li {
+  padding: 0;
+}

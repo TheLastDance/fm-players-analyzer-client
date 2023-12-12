@@ -10,6 +10,7 @@ import { Language, RowData } from './types';
 import { templateArraytoServerObj } from './Utils/templateArrayToServerObject';
 import { LoadingOverlay } from './portals/LoadingOverlay/LoadingOverlay';
 import { countTags } from './Utils/countTags';
+import { ErrorBoundary } from 'react-error-boundary';
 
 const maxPlayers = 1500;
 
@@ -29,6 +30,7 @@ function App() {
   const [error, setError] = useState("");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError("");
     const newFile = e.target.files?.[0];
     if (newFile?.type === "text/html") return setFile(newFile);
     setFile(undefined);
@@ -51,7 +53,8 @@ function App() {
         formData.append('lang', lang);
         formData.append('positionForServer', serverPositions);
 
-        const response = await fetch('http://localhost:3000/api', {
+        //https://fm-players-analyzer.onrender.com/api
+        const response = await fetch('http://localhost:3001/api', {
           method: 'POST',
           body: formData,
         });
@@ -66,11 +69,10 @@ function App() {
           setPage(0);
           return;
         }
-
         setError(json.error);
       }
 
-      if (!file) return setError("Upload file please");
+      if (!file) return setError("Upload html format file please");
       if (tagsQuantity && tagsQuantity > maxPlayers) return setError("Your file must have less than 1500 players");
 
     } catch (error) {
@@ -89,8 +91,13 @@ function App() {
       <main>
         <Templates lang={lang} />
         <Form handleFileChange={handleFileChange} handleSubmit={handleSubmit} />
-        {error && <h3>{error}</h3>}
-        {data.length ? <Table data={data} setData={setData} page={page} setPage={setPage} position={positionForServer} /> : null}
+        <ErrorBoundary
+          fallback={<h3 className='error_block'>Error occured, please check your html file</h3>}
+          resetKeys={[file]}
+        >
+          {error && <h3 className='error_block'>{error}</h3>}
+          {data.length ? <Table lang={lang} data={data} setData={setData} page={page} setPage={setPage} position={positionForServer} /> : null}
+        </ErrorBoundary>
       </main>
       <LoadingOverlay isVisible={isLoading} />
     </>

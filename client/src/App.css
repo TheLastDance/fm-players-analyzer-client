@@ -27,6 +27,11 @@ ul li span {
   padding: 0 10px;
 }
 
+.error_block {
+  margin: 15px auto 0 auto;
+  color: var(--errorColor);
+}
+
 @media(max-width: 1250px) {
   #root {
     margin: 0 15px;

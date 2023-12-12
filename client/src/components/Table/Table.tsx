@@ -1,7 +1,7 @@
 import './Table.css'
 import { useState, memo } from 'react';
 import { useToggle } from '../../customHooks/useToggle';
-import { RowData } from '../../types'
+import { RowData, Language } from '../../types'
 import { titles } from '../../data/positionsTitles';
 import Header from './Header/Header';
 import { TablePagination } from '@mui/material';
@@ -16,9 +16,10 @@ interface ITable {
   page: number,
   setPage: React.Dispatch<React.SetStateAction<number>>,
   position: any,
+  lang: Language["lang"]
 }
 
-const Table = memo(({ data, setData, page, setPage, position }: ITable) => {
+const Table = memo(({ data, setData, page, setPage, position, lang }: ITable) => {
   const skills = data.length ? data[0].skills : [];
   const headers = data.length ? Object.keys({ ...skills, ...data[0] }).filter(item => item !== 'skills' && item !== "attributes") : [];
   const [qty, setQty] = useState(50); // quantity of rows inside table for pagination.
@@ -57,7 +58,7 @@ const Table = memo(({ data, setData, page, setPage, position }: ITable) => {
             </tr>
           </thead>
           <tbody>
-            {data.slice(qty * page, (page + 1) * qty).map((item, index) => <Row key={index} item={item} />)}
+            {data.slice(qty * page, (page + 1) * qty).map((item, index) => <Row key={index} item={item} lang={lang} />)}
           </tbody>
         </table>
       </div>

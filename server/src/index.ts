@@ -7,7 +7,7 @@ import { positions } from './data/positions';
 import calculateCoef from './utils/calculateCoef';
 
 const app: Express = express();
-const PORT: string | number = process.env.PORT || 3000;
+const PORT: string | number = process.env.PORT || 3001;
 const attributesLength = 47;
 const maxFileSize = 2500000;
 
@@ -30,7 +30,7 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
       const parsed = htmlToData(htmlString, lang);
       const pos = JSON.parse(positionForServer);
 
-      if (Object.keys(parsed[0].attributes).length < attributesLength) return res.status(400).json({ error: `Use your language or check if your html file includes all ${attributesLength} attributes` });
+      if (!parsed.length || Object.keys(parsed[0].attributes).length < attributesLength) return res.status(400).json({ error: `Use your language or check if your html file includes all ${attributesLength} attributes` });
 
       //const a = performance.now();
       const coefData = calculateCoef({ ...positions, ...pos });
@@ -40,7 +40,7 @@ app.post('/api', upload.single('htmlFile'), (req, res) => {
       res.status(200).json(maxData);
     }
   } catch (err) {
-    res.status(500).json({ error: err });
+    res.status(500).json({ error: `Error: ${err}` });
   }
 });
 
