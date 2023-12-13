@@ -14,8 +14,12 @@ const Row = ({ item, lang }: IRow) => {
   const [isToggled, , handleFalse, handleTrue] = useToggle();
   //console.log(rest);
 
+  const keyTabbable = (e: React.KeyboardEvent<HTMLTableRowElement>) => {
+    if (e.key === "Enter" || e.key === " ") handleTrue();
+  }
+
   return (
-    <tr tabIndex={0} onClick={handleTrue}>
+    <tr tabIndex={0} onClick={handleTrue} onKeyDown={keyTabbable}>
       {Object.values({ ...skills, ...rest }).map((item, index) => <td key={index} className={skillsQualityStyle(item)}>
         {item}
       </td>)}

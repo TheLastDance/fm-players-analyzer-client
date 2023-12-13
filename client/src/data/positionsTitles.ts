@@ -14,4 +14,4 @@ export const titles = {
 
 export const wings = ['WA', 'WM', 'FB', 'WB'];
 
-export const centers = ['ST', 'CD', 'GK', 'CM', 'DM', 'AM']
+export const centers = ['ST', 'CD', 'GK', 'CM', 'DM', 'AM'];
