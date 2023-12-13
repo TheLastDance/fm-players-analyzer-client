@@ -27,22 +27,25 @@
   margin: 25px auto;
   border-radius: 10px;
   color: black;
-  overflow-x: scroll;
+  overflow: auto;
   position: relative;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
   background: var(--tableTdColor);
+  border-collapse: collapse;
+}
+
+.players_table thead {
+  position: sticky;
+  top: 0;
+  background: var(--darkColor);
+  height: 50px;
 }
 
 .players_table th {
-  position: sticky;
-  top: 0;
-  border-bottom: 1px solid white;
-  background: var(--darkColor);
-  height: 50px;
+  height: 100%;
 }
 
 .players_table th button {
@@ -67,11 +70,11 @@ td {
   padding: 10px 0;
   text-align: center;
   border-right: 1px solid black;
+  border-bottom: 1px solid black;
   font-weight: 600;
 }
 
 tbody tr {
-  border-bottom: 1px solid black;
   cursor: pointer;
 }
 
