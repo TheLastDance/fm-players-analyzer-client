@@ -1,0 +1,12 @@
+.stats li {
+  padding: 0;
+}
+
+.player-overlay_stats {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.player-overlay_stats div {
+  padding: 5px 10px;
+}

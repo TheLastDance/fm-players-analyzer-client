@@ -6,24 +6,79 @@ export enum TiersEnum {
   tier_4 = "tier_4"
 }
 
+export enum PositionsEnum {
+  Max = "Max",
+  ST = "ST",
+  CD = "CD",
+  GK = "GK",
+  CM = "CM",
+  WA = "WA",
+  DM = "DM",
+  AM = "AM",
+  WM = "WM",
+  FB = "FB",
+  WB = "WB",
+}
+
+export enum AttributesEnum {
+  Agg = "Agg",
+  Ecc = "Ecc",
+  Fre = "Fre",
+  Bra = "Bra",
+  Acc = "Acc",
+  Aer = "Aer",
+  Cor = "Cor",
+  Tec = "Tec",
+  Pac = "Pac",
+  Str = "Str",
+  Cmp = "Cmp",
+  Det = "Det",
+  Ref = "Ref",
+  Wor = "Wor",
+  Nat = "Nat",
+  Dec = "Dec",
+  Fir = "Fir",
+  Pen = "Pen",
+  Pas = "Pas",
+  Tck = "Tck",
+  Pun = "Pun",
+  Mar = "Mar",
+  v_1 = "1v1",
+  Cro = "Cro",
+  Agi = "Agi",
+  Ldr = "Ldr",
+  Bal = "Bal",
+  Cnt = "Cnt",
+  Tea = "Tea",
+  Ant = "Ant",
+  Fla = "Fla",
+  Han = "Han",
+  TRO = "TRO",
+  Hea = "Hea",
+  Cmd = "Cmd",
+  OtB = "OtB",
+  Fin = "Fin",
+  Dri = "Dri",
+  Lon = "Lon",
+  Jum = "Jum",
+  Sta = "Sta",
+  Pos = "Pos",
+  Kic = "Kic",
+  Vis = "Vis",
+  Com = "Com",
+  Thr = "Thr",
+  L_Th = "L Th",
+}
+
 export type Attribute = {
   [innerKey: string]: number;
 }
 
 export type RowData = {
-  attributes: ITranslationPairs;
+  attributes: TranslationPairs;
   skills: {
-    Max: number,
-    ST: number,
-    CD: number,
-    GK: number,
-    CM: number,
-    WA: number,
-    DM: number,
-    AM: number,
-    WM: number,
-    FB: number,
-    WB: number,
+    [key in PositionsEnum]: number;
+  } & {
     [key: string]: number;
   }
 } & {
@@ -35,58 +90,12 @@ export type Language = {
   img: string,
 }
 
-export interface ITranslationPairs {
-  "Agg": string,
-  "Ecc": string,
-  "Fre": string,
-  "Bra": string,
-  "Acc": string,
-  "Aer": string,
-  "Cor": string,
-  "Tec": string,
-  "Pac": string,
-  "Str": string,
-  "Cmp": string,
-  "Det": string,
-  "Ref": string,
-  "Wor": string,
-  "Nat": string,
-  "Dec": string,
-  "Fir": string,
-  "Pen": string,
-  "Pas": string,
-  "Tck": string,
-  "Pun": string,
-  "Mar": string,
-  "1v1": string,
-  "Cro": string,
-  "Agi": string,
-  "Ldr": string,
-  "Bal": string,
-  "Cnt": string,
-  "Tea": string,
-  "Ant": string,
-  "Fla": string,
-  "Han": string,
-  "TRO": string,
-  "Hea": string,
-  "Cmd": string,
-  "OtB": string,
-  "Fin": string,
-  "Dri": string,
-  "Lon": string,
-  "Jum": string,
-  "Sta": string,
-  "Pos": string,
-  "Kic": string,
-  "Vis": string,
-  "Com": string,
-  "Thr": string,
-  "L Th": string,
+export type TranslationPairs = {
+  [key in AttributesEnum]: string;
 }
 
 export interface ITemplateArray {
-  name: "tier_1" | "tier_2" | "tier_3" | "tier_4" | "no_tier",
+  name: TiersEnum.tier_1 | TiersEnum.tier_2 | TiersEnum.tier_3 | TiersEnum.tier_4 | TiersEnum.noTier,
   attributes: string[],
 }
 

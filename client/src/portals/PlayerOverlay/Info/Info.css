@@ -1,0 +1,33 @@
+.player_overlay_info_positions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.player-overlay_info {
+  display: flex;
+}
+
+.player-overlay_info .player_photo {
+  width: calc(var(--scaleOverlayFactor) * 200px);
+  height: calc(var(--scaleOverlayFactor) * 200px);
+  margin-right: 15px;
+}
+
+.player-overlay_info .info {
+  max-height: calc(var(--scaleOverlayFactor) * 450px);
+  max-width: 300px;
+  overflow: auto;
+  list-style: none;
+}
+
+.positions_tablet {
+  background-image: url('../../../assets/football_table.jpg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: calc(var(--scaleOverlayFactor) * 425px);
+  height: calc(var(--scaleOverlayFactor) * 275px);
+  position: relative;
+  margin-top: 25px;
+}

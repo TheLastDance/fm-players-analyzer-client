@@ -1,7 +1,7 @@
 import "./DroppableComponent.css"
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { attributesFull } from "../../../../data/attributes";
-import { Language, ITranslationPairs } from "../../../../types";
+import { Language, TranslationPairs, TiersEnum } from "../../../../types";
 
 interface IDroppableComponent {
   name: string,
@@ -9,6 +9,8 @@ interface IDroppableComponent {
   items: string[],
   lang: Language['lang'],
 }
+
+const { noTier, tier_1, tier_4 } = TiersEnum;
 
 function DroppableComponent({ name, items, id, lang }: IDroppableComponent) {
   return (
@@ -18,7 +20,7 @@ function DroppableComponent({ name, items, id, lang }: IDroppableComponent) {
           {name}
         </h3>
         <span>
-          {name === "tier_1" ? " (Most significant skills)" : name === "tier_4" ? " (Least significant skills)" : name === "no_tier" ? " (Unnecessary skills)" : ""}
+          {name === tier_1 ? " (Most significant skills)" : name === tier_4 ? " (Least significant skills)" : name === noTier ? " (Unnecessary skills)" : ""}
         </span>
       </div>
       <Droppable droppableId={id}>
@@ -27,7 +29,7 @@ function DroppableComponent({ name, items, id, lang }: IDroppableComponent) {
             {items.map((item, index) => <Draggable draggableId={item} index={index} key={item}>
               {(provided) => (
                 <li className="store_item" {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef} >
-                  <p title={attributesFull[lang][item as keyof ITranslationPairs]} >{attributesFull[lang][item as keyof ITranslationPairs]}</p>
+                  <p title={attributesFull[lang][item as keyof TranslationPairs]} >{attributesFull[lang][item as keyof TranslationPairs]}</p>
                 </li>
               )}
             </Draggable>)}
