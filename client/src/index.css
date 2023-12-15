@@ -26,16 +26,39 @@
   box-sizing: border-box;
 }
 
+@media(max-width: 1150px) {
+  :root {
+    --scaleOverlayFactor: 0.85;
+  }
+}
+
 @media(max-width:900px) {
   :root {
     --scaleFactor: 0.9;
-    --scaleOverlayFactor: 0.7;
+  }
+}
+
+@media(max-width:600px) {
+  :root {
+    --scaleOverlayFactor: 0.75;
   }
 }
 
 @media(max-width:500px) {
   :root {
     --scaleFactor: 0.85;
-    --scaleOverlayFactor: 0.5;
+  }
+}
+
+@media(max-width:380px) {
+  :root {
+    --scaleOverlayFactor: 0.65;
+  }
+}
+
+
+@media(max-width:300px) {
+  :root {
+    --scaleOverlayFactor: 0.6;
   }
 }

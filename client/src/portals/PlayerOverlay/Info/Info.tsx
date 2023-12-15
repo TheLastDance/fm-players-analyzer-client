@@ -21,9 +21,13 @@ const Info = ({ skills, info }: IInfo) => {
       <div className='player-overlay_info'>
         <img className='player_photo' src={anonymous_photo} alt="anonymous photo" />
         <ul className="info">
-          <li>{`Best rating: ${skills.Max}`}</li>
+          <li>
+            <p className="underlined_prop">{`Best rating: `}</p>
+            <p>{skills.Max}</p>
+          </li>
           {Object.entries(info).map((item, index) => <li key={index}>
-            {`${item[0]}: ${item[1]}`}
+            <p className="underlined_prop">{`${item[0]}: `}</p>
+            <p>{item[1]}</p>
           </li>)}
         </ul>
       </div>

@@ -28,11 +28,11 @@ export const PlayerOverlay: React.FC<IPlayerOverlayProps> = ({ info, attributes,
 
   return ReactDOM.createPortal((
     <FocusTrap open>
-      <div tabIndex={-1}>
+      <div className='tabIndex_div' tabIndex={-1}>
         <div className='overlay_bg'></div>
         <section className="player-overlay">
           <div className="close_button_container">
-            <Button variant='text' color='inherit' size='large' onClick={handleFalse}>X</Button>
+            <Button variant='text' color='inherit' size='large' sx={{ zIndex: 5 }} onClick={handleFalse}>X</Button>
           </div>
           <div className='player-overlay_container'>
             <Info info={info} skills={skills} />

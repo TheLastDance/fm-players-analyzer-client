@@ -1,11 +1,17 @@
 .player-overlay {
   position: fixed;
+  height: 100%;
+  width: 100%;
   top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
+  /* bottom: 0;
+  left: 0;
+  right: 0; */
   z-index: 3;
   color: white;
+  display: flex;
+  justify-content: space-between;
+  overflow-y: auto;
 }
 
 .overlay_bg {
@@ -16,6 +22,7 @@
   height: 100%;
   background: black;
   opacity: 0.9;
+  filter: blur(20px);
   display: block;
   position: fixed;
   z-index: 1;
@@ -28,8 +35,37 @@
 }
 
 .player-overlay_container {
-  max-width: var(--rootContainerSize);
+  width: var(--rootContainerSize);
+  height: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+@media (max-width: 1250px) {
+  .player-overlay_container {
+    padding: 0 15px;
+  }
+}
+
+@media(max-width:770px) {
+  .player-overlay_container {
+    flex-direction: column;
+    padding: 20px 0;
+  }
+}
+
+@media(max-width:380px) {
+  .player-overlay_container {
+    padding: 50px 0;
+  }
+}
+
+@media(max-height:650px) {
+  .player-overlay {
+    height: unset;
+    max-height: 100%;
+  }
 }
