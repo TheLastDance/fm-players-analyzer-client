@@ -1,17 +1,11 @@
-import { Attributes } from "../types";
-import { ICalculateCoef, ForTiers } from "../types";
+import { AttributesEnum, TranslationPairs } from "../../types";
+import { ICalculateCoef } from "../../types";
+import { maskSkillHandling } from "../maskedAttributes";
 
-const isMaskedByHalf = (val: string) => val.match(/^(\d+)-(\d+)$/);
-
-function maskSkillHandling(val: string): number {
-  const match = isMaskedByHalf(val);
-  return Number(val) ? Number(val) : match ? (Number(match[2]) + Number(match[1])) / 2 : 10;
-}
-
-function calculateSkill(positions: ICalculateCoef, playersAttributes: Attributes) {
+function calculateSkill(positions: ICalculateCoef, playersAttributes: TranslationPairs) {
   const { mergedObj, coef, keysOfPositions } = positions;
   const multiplier = 5.5; // max skill in game equals to 20 so if we want overall skills as in fifa/pes we need to multiply our count to this variable.
-  let skills: ForTiers = {};
+  const skills: { [key: string]: number; } = {};
 
   for (let i = 0; i < mergedObj.length; i++) {
     const pos = mergedObj[i][keysOfPositions[i]]; // merged object of stats coefficients
@@ -19,7 +13,7 @@ function calculateSkill(positions: ICalculateCoef, playersAttributes: Attributes
     let count = 0;
 
     for (let j = 0; j < posArr.length; j++) {
-      const key = posArr[j] as keyof Attributes;
+      const key = posArr[j] as AttributesEnum;
       count = pos[key] * maskSkillHandling(playersAttributes[key]) + count; // sums attribute multiplied by its coefficient
     }
 

@@ -1,9 +1,9 @@
-import { IPositions, ICalculateCoef, MergedTiers } from "../types";
+import { IPositions, ICalculateCoef, MergedTiers } from "../../types";
 
 function calculateCoef(position: IPositions): ICalculateCoef {
   const keysArray = Object.keys(position);
 
-  const mergedObj: ICalculateCoef['mergedObj'] = keysArray.map((item: string) => ({
+  const mergedObj: any = keysArray.map((item: string) => ({
     [item]: ({
       ...position[item]['tier_1'],
       ...position[item]['tier_2'],

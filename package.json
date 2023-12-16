@@ -1,25 +1,37 @@
 {
-  "name": "ts-express-react-vite-template",
-  "version": "1.0.0",
-  "description": "",
+  "name": "vite-tsx-template",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd server && npm start",
-    "start-server": "concurrently \"npm run start-server:server\" ",
-    "start-client": "concurrently \"npm run start-client:client\" ",
-    "build": "concurrently \"npm run build:build \" ",
-    "install-server": "cd server && npm i",
-    "install-client": "cd client && npm i",
-    "start-server:server": "cd server && npm run start-dev",
-    "start-client:client": "cd client && npm run dev",
-    "build:build": "cd client && npm run build"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "author": "TheLastDance",
-  "license": "ISC",
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/material": "^5.14.19",
+    "@types/react-beautiful-dnd": "^13.1.7",
+    "@uidotdev/usehooks": "^2.4.1",
+    "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.11"
+  },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "concurrently": "^8.2.2",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.3.2"
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vite-plugin-eslint": "^1.8.1"
   }
 }

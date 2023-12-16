@@ -28,8 +28,8 @@ export const templateArraytoServerObj = (dataFromStorage: string | null) => {
       };
     }
 
-    return JSON.stringify(obj);
+    return obj;
   }
 
-  return JSON.stringify({});
+  return {};
 }

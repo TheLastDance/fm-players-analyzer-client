@@ -5,6 +5,7 @@
   margin: 2px 0;
   font-weight: 400;
   padding: 0 5px;
+  font-size: calc(var(--scaleOverlayFactor) * 16px);
 }
 
 .stats li:nth-child(odd) {
@@ -20,7 +21,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: calc(var(--scaleOverlayFactor) * 190px);
+  max-width: calc(var(--scaleOverlayFactor) * 140px);
 }
 
 .Merged .stats li {

@@ -10,12 +10,15 @@ import Templates from './components/Templates/Templates';
 import { Language, RowData } from './types';
 import { templateArraytoServerObj } from './Utils/templateArrayToServerObject';
 import { LoadingOverlay } from './portals/LoadingOverlay/LoadingOverlay';
-import { countTags } from './Utils/countTags';
+import { readFile, htmlToData } from './Utils/processFile/processFuncs';
 import { ErrorBoundary } from 'react-error-boundary';
 import Rules from './components/Rules/Rules';
 import Footer from './components/Footer/Footer';
+import calculateCoef from './Utils/processFile/calculateCoef';
+import { positionsCoef } from './data/positions';
+import calculateSkill from './Utils/processFile/calculateSkill';
 
-const maxPlayers = 1500;
+// const maxPlayers = 1500;
 
 function App() {
   const storedData = localStorage.getItem('data');
@@ -41,44 +44,37 @@ function App() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const serverPositions = templateArraytoServerObj(localStorage.getItem('templates'));
 
     try {
-      const tagsQuantity = await countTags(file);
+      //const tagsQuantity = await countTags(file);
       setError("");
 
-      if (file && tagsQuantity && tagsQuantity <= maxPlayers) {
-        setIsLoading(true)
-        const formData = new FormData();
+      if (file) {
+        setIsLoading(true);
+        const readedFile = await readFile(file);
+        const newData = htmlToData(readedFile, lang);
 
-        const serverPositions = templateArraytoServerObj(localStorage.getItem('templates'));
-
-        formData.append('htmlFile', file);
-        formData.append('lang', lang);
-        formData.append('positionForServer', serverPositions);
-
-        //https://fm-analyzer.cyclic.app/api
-        const response = await fetch('http://localhost:3001/api', {
-          method: 'POST',
-          body: formData,
-        });
-
-        const json = await response.json();
-
-        if (response.ok) {
-          setData(json);
-          localStorage.setItem('data', JSON.stringify(json));
-          setPositionForServer(JSON.parse(serverPositions));
-          localStorage.setItem('serverTemplates', serverPositions);
+        if (newData) {
+          const coefData = calculateCoef({ ...positionsCoef, ...serverPositions });
+          const tableData = newData.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes) }));
+          const maxData = tableData.map(item => ({ ...item, skills: { Max: Math.max(...Object.values(item.skills)), ...item.skills } }))
+          console.log(maxData);
+          setData(maxData as RowData[]);
+          localStorage.setItem('data', JSON.stringify(maxData));
+          setPositionForServer(serverPositions);
+          localStorage.setItem('serverTemplates', JSON.stringify(serverPositions));
           setPage(0);
           return;
         }
-        setError(json.error);
       }
 
       if (!file) return setError("Upload html format file please");
-      if (tagsQuantity && tagsQuantity > maxPlayers) return setError("Your file must have less than 1500 players");
+      //if (tagsQuantity && tagsQuantity > maxPlayers) return setError("Your file must have less than 1500 players");
 
     } catch (error) {
+      console.log(error);
+
       const err = error as Error;
       setError(err.message);
     } finally {

@@ -70,6 +70,9 @@ export enum AttributesEnum {
   L_Th = "L Th",
 }
 
+const { tier_1, tier_2, tier_3, tier_4 } = TiersEnum
+const { ST, CD, GK, CM, WA, DM, AM, WM, FB, WB } = PositionsEnum
+
 export type Attribute = {
   [innerKey: string]: number;
 }
@@ -113,3 +116,47 @@ export interface ITemplateArrayForServer {
   [TiersEnum.tier_3]: [string, number],
   [TiersEnum.tier_4]: [string, number],
 }
+
+export type IPositions = {
+  [key in PositionsEnum]: ITemplateArrayForServer;
+} & {
+  [key: string]: ITemplateArrayForServer;
+};
+
+export type MergedTiers = {
+  [key: string]: {
+    [key: string]: number;
+  }
+};
+
+export interface ICalculateCoef {
+  keysOfPositions: string[],
+  mergedObj: MergedTiers[],
+  coef: number[]
+}
+
+export type ForTiers = {
+  [key: string]: number;
+}
+
+export type Tiers = {
+  [tier_1]: ForTiers;
+  [tier_2]: ForTiers;
+  [tier_3]: ForTiers;
+  [tier_4]: ForTiers;
+}
+
+export type Positions = {
+  [ST]: Tiers,
+  [CD]: Tiers,
+  [GK]: Tiers,
+  [CM]: Tiers,
+  [WA]: Tiers,
+  [DM]: Tiers,
+  [AM]: Tiers,
+  [WM]: Tiers,
+  [FB]: Tiers,
+  [WB]: Tiers,
+} & {
+  [key: string]: Tiers;
+};

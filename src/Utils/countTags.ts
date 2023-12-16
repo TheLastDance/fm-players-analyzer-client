@@ -20,4 +20,4 @@ export const countTags = (file: File | undefined): Promise<number> | undefined =
       reader.readAsText(file);
     })
   }
-};
+}; // dont need right now
