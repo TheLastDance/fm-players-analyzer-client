@@ -26,6 +26,14 @@
   box-sizing: border-box;
 }
 
+button {
+  border: none;
+  outline: none;
+  background: none;
+  color: var(--maincFontColor);
+  font-family: Roboto;
+}
+
 @media(max-width: 1150px) {
   :root {
     --scaleOverlayFactor: 0.85;

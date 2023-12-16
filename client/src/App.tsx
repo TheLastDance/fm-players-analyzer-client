@@ -12,6 +12,7 @@ import { templateArraytoServerObj } from './Utils/templateArrayToServerObject';
 import { LoadingOverlay } from './portals/LoadingOverlay/LoadingOverlay';
 import { countTags } from './Utils/countTags';
 import { ErrorBoundary } from 'react-error-boundary';
+import Rules from './components/Rules/Rules';
 
 const maxPlayers = 1500;
 
@@ -90,6 +91,7 @@ function App() {
     <>
       <Nav lang={lang} setLang={setLang} />
       <main>
+        <Rules />
         <Templates lang={lang} />
         <Form handleFileChange={handleFileChange} handleSubmit={handleSubmit} />
         <ErrorBoundary

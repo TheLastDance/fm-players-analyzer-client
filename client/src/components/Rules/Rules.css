@@ -1,0 +1,47 @@
+.rules_section {
+  margin-bottom: 20px;
+}
+
+.rules_section ul {
+  margin-left: 5px;
+  padding: 0 20px;
+}
+
+.rules_section button {
+  font-size: var(--mainFS);
+  font-weight: bold;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+}
+
+.rules_section .focused_button:focus {
+  text-decoration: underline;
+}
+
+.rules_section button:hover {
+  text-decoration: underline;
+}
+
+.rules_section button img {
+  margin-left: 5px;
+}
+
+.rules_section button .rotate_arrow {
+  transform: rotate(180deg);
+}
+
+.rules_section ul li {
+  list-style: decimal;
+  padding: 3px 0;
+  font-size: var(--templateFS);
+}
+
+.rules_section ul .rules_li {
+  text-decoration: underline;
+  color: var(--errorColor);
+}
+
+.rules_section ul .rules_li:nth-child(1) {
+  margin: 5px 0;
+}
