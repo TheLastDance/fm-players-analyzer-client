@@ -56,8 +56,8 @@ function App() {
         formData.append('lang', lang);
         formData.append('positionForServer', serverPositions);
 
-        //https://fm-players-analyzer.onrender.com/api
-        const response = await fetch('https://bewildered-fish-stockings.cyclic.app/api', {
+        //https://fm-analyzer.cyclic.app/api
+        const response = await fetch('http://localhost:3001/api', {
           method: 'POST',
           body: formData,
         });

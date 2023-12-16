@@ -9,6 +9,7 @@ const Rules = () => {
   return (
     <section className="rules_section">
       <button
+        type="button"
         onClick={handleToggle}
         className={toggled ? "focused_button" : ""}
       >
