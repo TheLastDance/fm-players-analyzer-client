@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd server && npm start",
     "start-server": "concurrently \"npm run start-server:server\" ",
     "start-client": "concurrently \"npm run start-client:client\" ",
     "build": "concurrently \"npm run build:build \" ",

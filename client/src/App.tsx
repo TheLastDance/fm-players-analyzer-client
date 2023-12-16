@@ -57,7 +57,7 @@ function App() {
         formData.append('positionForServer', serverPositions);
 
         //https://fm-players-analyzer.onrender.com/api
-        const response = await fetch('http://localhost:3001/api', {
+        const response = await fetch('https://dizzy-colt-tiara.cyclic.app', {
           method: 'POST',
           body: formData,
         });
