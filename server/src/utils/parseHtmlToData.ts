@@ -3,15 +3,8 @@ import { attributes } from "../data/attributes";
 import * as cheerio from 'cheerio';
 import changeObjectPairs from "./changeObjectPairs";
 
-const maxPlayers = 1000 + 1;
-
-
 function htmlToData(htmlFile: string, lang: keyof typeof attributes = 'en') {
   const $ = cheerio.load(htmlFile);
-
-  // if ($("tr").length > maxPlayers) {
-  //   res.status(400).json({ error: "Too many players were imported, limit is 1000" })
-  // }
 
   // Find the table using a selector
   const table = $('table');
