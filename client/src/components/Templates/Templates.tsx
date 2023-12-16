@@ -29,9 +29,6 @@ const Templates = memo(({ lang }: ITemplates) => {
     handleTrue();
   }
 
-  console.log(templatesArray);
-
-
   return (
     <section className='templates_section'>
       <div className="templates_header">

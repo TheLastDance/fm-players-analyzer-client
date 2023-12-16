@@ -31,8 +31,6 @@ const Table = memo(({ data, setData, page, setPage, position, lang }: ITable) =>
       if (handleTitles(item, position)) {
         setData(prev => [...prev].sort((a: RowData, b: RowData) => b.skills[item] - a.skills[item]));
       } else {
-        console.log(item);
-
         setData(prev => [...prev].sort((a: RowData, b: RowData) => a[item] === b[item] ? 0 : a[item] < b[item] ? -1 : 1));
       }
     } else {
@@ -43,8 +41,6 @@ const Table = memo(({ data, setData, page, setPage, position, lang }: ITable) =>
       }
     }
   }
-
-  console.log(455);
 
   return (
     <section className={isResized ? 'table_section resized_table' : 'table_section'}>

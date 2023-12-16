@@ -24,8 +24,6 @@ export const PlayerOverlay: React.FC<IPlayerOverlayProps> = ({ info, attributes,
     return null;
   }
 
-  console.log(info, attributes, skills);
-
   return ReactDOM.createPortal((
     <FocusTrap open>
       <div className='tabIndex_div' tabIndex={-1}>

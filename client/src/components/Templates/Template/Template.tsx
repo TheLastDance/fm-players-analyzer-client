@@ -91,8 +91,6 @@ const Template = ({ lang, handleFalse, templatesArray, setTemplatesArray, item }
     setTemplates(prev => ({ ...prev, templates: newStores }));
   }
 
-  console.log(template, template.name);
-
   // saves a template in array and storage and closes template component
   const handleButton = () => {
     const templates = [...templatesArray];

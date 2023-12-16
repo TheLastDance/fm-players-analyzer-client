@@ -13,6 +13,7 @@ import { LoadingOverlay } from './portals/LoadingOverlay/LoadingOverlay';
 import { countTags } from './Utils/countTags';
 import { ErrorBoundary } from 'react-error-boundary';
 import Rules from './components/Rules/Rules';
+import Footer from './components/Footer/Footer';
 
 const maxPlayers = 1500;
 
@@ -85,8 +86,6 @@ function App() {
     }
   }
 
-  console.log(data);
-
   return (
     <>
       <Nav lang={lang} setLang={setLang} />
@@ -102,6 +101,7 @@ function App() {
           {data.length ? <Table lang={lang} data={data} setData={setData} page={page} setPage={setPage} position={positionForServer} /> : null}
         </ErrorBoundary>
       </main>
+      <Footer />
       <LoadingOverlay isVisible={isLoading} />
     </>
   )
