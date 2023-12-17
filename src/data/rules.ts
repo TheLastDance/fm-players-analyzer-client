@@ -16,6 +16,6 @@ export const rules = [
   "You can upload files with less than 25000 players.",
   "Assign unique names to each template or ensure they have a different case at the very least.",
   "Remember that clearing browser cookies/cache will delete app data. Using incognito mode will not save changes, but it won't delete data from non-incognito mode.",
-  "Please be aware that every browser has a capacity limit of 10 mb for application data. Therefore, if you upload a file exceeding 10 mb, your table data will not be stored.",
+  "Please be aware that every browser has a capacity limit of 10 mb for application data. Therefore, if you upload a data exceeding 10 mb, your table data will not be stored.",
   "Currently, you can create up to 10 templates. However, I am open to expanding this limit if the application gains popularity.",
 ]

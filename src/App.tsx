@@ -51,11 +51,11 @@ function App() {
 
       if (newData) {
         const maxData = calculationAlgorithm(serverPositions, newData);
-        setData(maxData as RowData[]);
-        localStorage.setItem('data', JSON.stringify(maxData));
         setPositionForServer(serverPositions);
         localStorage.setItem('serverTemplates', JSON.stringify(serverPositions));
         setPage(0);
+        setData(maxData as RowData[]);
+        localStorage.setItem('data', JSON.stringify(maxData));
       }
     } catch (error) {
       console.log(error);

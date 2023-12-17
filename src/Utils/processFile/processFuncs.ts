@@ -5,6 +5,7 @@ import { tableValidation, languageAndAttributesValidation } from "./errorHandlin
 import calculateCoef from "./calculateCoef";
 import calculateSkill from "./calculateSkill";
 import { positionsCoef } from "../../data/positions";
+import { isMaskedByHalf } from "../maskedAttributes";
 
 export const readFile = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
@@ -58,7 +59,8 @@ export function htmlToData(htmlFile: string, lang: Language['lang']) {
 
         if (Object.prototype.hasOwnProperty.call(language, header)) {
           // Hardcode for identical keys from the table to divide them
-          if ((header === 'Nat' && (cellText?.length === 0 || cellText?.length === 3))) {
+          //CHANGE IT BECAUSE WE HAVE MASKED ATTRIBUTES WITH 3 LENGTH
+          if ((header === 'Nat' && (cellText?.length === 0 || (cellText?.length === 3 && !isMaskedByHalf(cellText))))) {
             rowData.Nationality = cellText;
           } else {
             const key = language[header as keyof TranslationPairs] as keyof TranslationPairs;

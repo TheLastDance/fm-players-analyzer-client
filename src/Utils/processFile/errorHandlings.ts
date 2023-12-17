@@ -1,6 +1,6 @@
 import { RowData } from "../../types";
 
-const maxPlayers = 25000;
+const maxPlayers = 26000;
 const attributesLength = 47;
 
 const errorThrow = (errorMessage: string) => {
