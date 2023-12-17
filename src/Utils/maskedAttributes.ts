@@ -1,4 +1,4 @@
-export const isMaskedByHalf = (val: string) => val.match(/^(\d+)-(\d+)$/);
+export const isMaskedByHalf = (val: string) => val ? val.match(/^(\d+)-(\d+)$/) : false;
 
 export function maskSkillHandling(val: string): number {
   const match = isMaskedByHalf(val);

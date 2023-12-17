@@ -17,6 +17,7 @@ const Rules = () => {
         <img className={toggled ? "rotate_arrow" : ""} src={arrow_down_icon} alt="arrow_icon" />
       </button>
       {toggled && <ul className="rules_ul">
+        <li>If you have problems during using the app, first of all watch the <a href="https://www.youtube.com/watch?v=UvkNeuqOjqQ" target="_blank">video tutorial</a>. </li>
         {tutorial.map((item, index) => <li key={index}>
           {item}
         </li>)}

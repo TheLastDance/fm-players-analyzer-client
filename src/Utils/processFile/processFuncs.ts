@@ -1,32 +1,38 @@
 import { Language, RowData, TranslationPairs } from "../../types";
 import { attributes } from "../../data/attributes";
 import changeObjectPairs from "./../processFile/changeObjectPairs";
-
-// const attributesLength = 47;
-// const maxFileSize = 2500000;
+import { tableValidation, languageAndAttributesValidation } from "./errorHandlings";
+import calculateCoef from "./calculateCoef";
+import calculateSkill from "./calculateSkill";
+import { positionsCoef } from "../../data/positions";
 
 export const readFile = (file: File): Promise<string> => {
-
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = (event) => resolve(event.target?.result as string);
     reader.onerror = (error) => reject(error);
     reader.readAsText(file);
   });
-
 }
 
-export function htmlToData(htmlFile: string, lang: Language['lang']) {
+const pickTable = (htmlFile: string) => {
   // Parse HTML string into a DOM document
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlFile, 'text/html');
 
   // Find the table using a selector
   const table = doc.querySelector('table');
-  const language: TranslationPairs = changeObjectPairs(attributes[lang]);
 
+  return table;
+}
+
+export function htmlToData(htmlFile: string, lang: Language['lang']) {
+  const language: TranslationPairs = changeObjectPairs(attributes[lang]);
   // Extract headers from the first row (assuming they are in <th> elements)
   const headers: string[] = [];
+  const table = pickTable(htmlFile);
+
+  tableValidation(table);
 
   if (table) {
     const headerCells = table.querySelectorAll('tr:first-child th');
@@ -64,9 +70,15 @@ export function htmlToData(htmlFile: string, lang: Language['lang']) {
       });
 
       tableData.push(rowData);
+      if (tableData.length === 1) languageAndAttributesValidation(tableData);
     });
 
     return tableData;
   }
+}
 
+export const calculationAlgorithm = (serverPositions: any, newData: RowData[]) => {
+  const coefData = calculateCoef({ ...positionsCoef, ...serverPositions });
+  const tableData = newData.map(item => ({ ...item, skills: calculateSkill(coefData, item.attributes) }));
+  return tableData.map(item => ({ ...item, skills: { Max: Math.max(...Object.values(item.skills)), ...item.skills } }))
 }

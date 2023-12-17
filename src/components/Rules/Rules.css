@@ -45,3 +45,12 @@
 .rules_section ul .rules_li:nth-child(1) {
   margin: 5px 0;
 }
+
+.rules_ul li a {
+  color: var(--templateAttributeColor);
+  text-decoration: none;
+}
+
+.rules_ul li a:hover {
+  text-decoration: underline;
+}
